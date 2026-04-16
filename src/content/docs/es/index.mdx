@@ -1,0 +1,44 @@
+---
+title: ngx-theme-stack
+description: Un gestor de temas potente y sencillo para Angular.
+template: splash
+hero:
+  tagline: Un gestor de temas potente y sencillo para Angular. Diseñado para rendimiento y soporte SSR.
+  actions:
+    - text: Primeros Pasos
+      link: /es/guides/getting-started/
+      icon: right-arrow
+    - text: Ver Referencia API
+      link: /es/reference/api/
+      icon: open-book
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+
+## Características
+
+<CardGrid stagger>
+	<Card title="Comando Único" icon="rocket">
+		Configuración automática mediante `ng add`. Sin configuración manual.
+	</Card>
+	<Card title="Preferencia del Sistema" icon="laptop">
+		Sincronización automática con los ajustes del SO (`prefers-color-scheme`).
+	</Card>
+	<Card title="Basado en Signals" icon="setting">
+		Arquitectura moderna usando Angular Signals para máxima reactividad.
+	</Card>
+	<Card title="Listo para SSR" icon="document">
+		Seguro para entornos de Server-Side Rendering sin parpadeo (Zero Flicker).
+	</Card>
+</CardGrid>
+
+## Estrategia Zero Flicker
+
+Nos tomamos el rendimiento en serio. La **Estrategia Critters** asegura que tu tema se aplique instantáneamente, evitando el molesto parpadeo blanco antes de que el CSS cargue.
+
+```bash
+# Instalar ahora
+ng add ngx-theme-stack
+```
