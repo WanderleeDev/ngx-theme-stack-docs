@@ -39,6 +39,19 @@ export const appConfig: ApplicationConfig = {
 Whenever you update these settings manually in `app.config.ts`, you should run the sync command to ensure your `index.html` is updated with the correct anti-flash script logic.
 :::
 
+## Type-Safe Themes
+
+If you want full type-safety for your themes in your services, you should mark the `themes` array `as const`. This allows the library to infer the exact theme names in your signals.
+
+```typescript
+provideThemeStack({
+  themes: ['sepia', 'ocean', 'forest'] as const,
+  defaultTheme: 'sepia'
+})
+```
+
+With this configuration, any service you inject will know exactly which themes are available.
+
 ## Sync Command
 
 The sync command refreshes the inline script in your `index.html` to match your current configuration.
@@ -46,3 +59,4 @@ The sync command refreshes the inline script in your `index.html` to match your 
 ```bash
 ng generate ngx-theme-stack:sync --project YOUR_PROJECT_NAME
 ```
+

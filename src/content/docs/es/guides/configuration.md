@@ -39,6 +39,19 @@ export const appConfig: ApplicationConfig = {
 Cada vez que actualices estos ajustes manualmente en `app.config.ts`, debes ejecutar el comando de sincronización para asegurar que tu `index.html` se actualice con la lógica correcta del script anti-parpadeo.
 :::
 
+## Temas con Tipado Seguro (Type-Safe)
+
+Si deseas un tipado completo para tus temas en tus servicios, debes marcar el array de `themes` como `as const`. Esto permite que la librería infiera los nombres exactos de los temas en tus señales.
+
+```typescript
+provideThemeStack({
+  themes: ['sepia', 'ocean', 'forest'] as const,
+  defaultTheme: 'sepia'
+})
+```
+
+Con esta configuración, cualquier servicio que inyectes sabrá exactamente qué temas están disponibles.
+
 ## Comando de Sincronización
 
 El comando de sincronización refresca el script inlined en tu `index.html` para que coincida con tu configuración actual.
@@ -46,3 +59,4 @@ El comando de sincronización refresca el script inlined en tu `index.html` para
 ```bash
 ng generate ngx-theme-stack:sync --project NOMBRE_DE_TU_PROYECTO
 ```
+

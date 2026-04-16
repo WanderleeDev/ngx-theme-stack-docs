@@ -50,9 +50,63 @@ Para ofrecer una experiencia "Zero Config", el comando de instalación automatiz
 - **`index.html`**: Inyecta el marcador y el script de bloqueo anti-parpadeo en el `<head>`.
 - **`themes.css`**: Crea un archivo base con selectores listos para que definas tus variables.
 
+## Uso Básico
+
+Inyecta los servicios en tus componentes usando la función `inject()` de Angular.
+
+### Cambio Sencillo (Toggle)
+
+La forma más fácil de añadir un interruptor de tema es usando `ThemeToggleService`.
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeToggleService } from 'ngx-theme-stack';
+
+@Component({
+  selector: 'app-theme-switch',
+  template: `
+    <button (click)="theme.toggle()">
+      {{ theme.isDark() ? '🌙' : '☀️' }}
+    </button>
+  `,
+  standalone: true
+})
+export class ThemeSwitchComponent {
+  protected readonly theme = inject(ThemeToggleService);
+}
+```
+
+### Control Avanzado
+
+Para escenarios más complejos, utiliza `CoreThemeService` para acceder a la lista completa de temas y señales específicas.
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { CoreThemeService } from 'ngx-theme-stack';
+
+@Component({
+  template: `
+    <select [value]="theme.selectedTheme()" (change)="onThemeChange($event)">
+      @for (t of theme.availableThemes; track t) {
+        <option [value]="t">{{ t }}</option>
+      }
+    </select>
+  `
+})
+export class SettingsComponent {
+  protected readonly theme = inject(CoreThemeService);
+
+  onThemeChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    this.theme.setTheme(value);
+  }
+}
+```
+
 ## Siguientes Pasos
 
 Ahora que tienes la librería instalada, puedes:
 - [Configurar el provider inicial](/es/guides/configuration)
 - [Añadir tus variables CSS](/es/guides/styling)
-- [Usar los servicios en tus componentes](/es/reference/api)
+- [Ver la Referencia de API completa](/es/reference/api)
+
