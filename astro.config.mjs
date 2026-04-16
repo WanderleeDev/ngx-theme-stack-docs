@@ -20,7 +20,10 @@ export default defineConfig({
           logo: {
             src: './src/assets/logo.webp',
           },
-          social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/WanderleeDev/ngx-theme-stack' }],
+          social: [
+            { icon: 'github', label: 'GitHub', href: 'https://github.com/WanderleeDev/ngx-theme-stack' },
+            { icon: 'external', label: 'Demo', href: 'https://demo-ngx-theme-stack.wanderlee.site/' }
+          ],
           sidebar: [
               {
                   label: 'Introduction',
