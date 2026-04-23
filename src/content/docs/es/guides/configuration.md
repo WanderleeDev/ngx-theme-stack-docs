@@ -19,7 +19,7 @@ export const appConfig: ApplicationConfig = {
       defaultTheme: 'system',              // Fallback inicial ('system' resuelve vía matchMedia)
       mode: 'class',                       // 'class', 'attribute' o 'both'
       strategy: 'critters',                // 'critters' (SSR) o 'blocking' (SPA estándar)
-      storageKey: 'ngx-theme-stack-theme'  // Clave de LocalStorage
+      storageKey: 'ngx-theme-stack'        // Clave de LocalStorage
     })
   ]
 };
@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
 | `defaultTheme` | `string` | `'system'` | Tema usado en la primera visita o cuando no hay preferencia guardada. |
 | `mode` | `NgMode` | `'class'` | Cómo se aplica el tema: `class`, `attribute` (`data-theme`), o `both`. |
 | `strategy` | `NgStrategy`| `'critters'` | Estrategia de rendimiento anti-parpadeo: `critters` (CSS inlined) o `blocking`. |
-| `storageKey` | `string` | `'ngx-theme-stack-theme'` | Clave utilizada para persistir la preferencia en `localStorage`. |
+| `storageKey` | `string` | `'ngx-theme-stack'` | Clave utilizada para persistir la preferencia en `localStorage`. |
 
 :::important
 Cada vez que actualices estos ajustes manualmente en `app.config.ts`, debes ejecutar el comando de sincronización para asegurar que tu `index.html` se actualice con la lógica correcta del script anti-parpadeo.
