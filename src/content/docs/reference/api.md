@@ -11,38 +11,53 @@ description: Detailed documentation of the services, tokens, and types provided 
 
 The brain of the library. It handles theme persistence, system preference detection, and DOM updates.
 
-#### Signals
+#### Signals and Properties
 
-| Signal | Type | Description |
+| Signal / Prop | Type | Description |
 | :--- | :--- | :--- |
 | `selectedTheme` | `Signal<NgTheme>` | The theme explicitly selected by the user (can be `'system'`). |
-| `resolvedTheme` | `Signal<NgTheme>` | The actual theme applied to the DOM (resolves `'system'` to `'light'` or `'dark'`). |
-| `isDark` | `Signal<boolean>` | True if the resolved theme is `'dark'`. |
-| `isLight` | `Signal<boolean>` | True if the resolved theme is `'light'`. |
-| `isSystem` | `Signal<boolean>` | True if the selected theme is `'system'`. |
-| `isHydrated` | `Signal<boolean>` | True after client-side hydration. **Crucial for SSR.** |
+| `resolvedTheme` | `Signal<NgTheme>` | The actual theme applied to the DOM (resolves `'system'` to `'light'` or `'dark'`). Never `'system'`. |
+| `isDark` | `Signal<boolean>` | `true` if the resolved theme is `'dark'`. |
+| `isLight` | `Signal<boolean>` | `true` if the resolved theme is `'light'`. |
+| `isSystem` | `Signal<boolean>` | `true` if the selected theme is `'system'`. |
+| `isHydrated` | `Signal<boolean>` | `true` after client-side hydration. **Crucial for avoiding SSR flicker.** |
+| `availableThemes` | `NgTheme[]` | List of all configured themes (including custom ones). |
 
 #### Methods
 
-- `setTheme(theme: NgTheme): void`: Changes the active theme. Throws if the theme is invalid.
+- `setTheme(theme: NgTheme): void`: Changes the active theme and persists the choice. Throws an `NgxThemeStackError` if the theme is not in the valid themes list.
 
 ---
 
 ## Convenience Services
 
-These services wrap `CoreThemeService` to provide common interaction patterns.
+These services internally inject `CoreThemeService` and expose **all of its state signals** so you don't have to inject both services.
+
+#### Common signals in all services:
+- `selectedTheme`, `resolvedTheme`, `isDark`, `isLight`, `isSystem`, `isHydrated`.
 
 ### `ThemeToggleService`
 
-Ideal for simple "Dark/Light" switches.
+Ideal for simple switches.
 
-- `toggle()`: Toggles between `'dark'` and `'light'`. If current is `'system'`, it switches to the opposite of the current system preference.
+- `toggle()`: Toggles between `'dark'` and `'light'`.
 
 ### `ThemeCycleService`
 
-Ideal for buttons that rotate through all available themes (e.g., System → Light → Dark → ...).
+Ideal for buttons that rotate through all available themes.
 
-- `cycle()`: Advances to the next theme in the configured `themes` array.
+- `cycle()`: Advances to the next theme in the `themes` array.
+- `availableThemes`: Array of themes configured for the cycle.
+- `cycleIndex`: `Signal<number>` - Index of the current theme.
+- `preceding`: `Signal<NgTheme>` - The previous theme.
+- `upcoming`: `Signal<NgTheme>` - The next theme.
+
+### `ThemeSelectService`
+
+Ideal for dropdown menus.
+
+- `select(theme: NgTheme)`: Sets the active theme.
+- `availableThemes`: Array of all configured themes.
 
 ---
 
@@ -50,17 +65,17 @@ Ideal for buttons that rotate through all available themes (e.g., System → Lig
 
 ### `provideThemeStack(config?: Partial<NgConfig>)`
 
-Provider function to initialize the library in your `app.config.ts`.
+Initializes the library. Custom themes passed in `config.themes` are automatically **merged** with the default themes (`['light', 'dark', 'system' ]`).
 
 #### `NgConfig` Options
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `defaultTheme` | `NgTheme` | `'system'` | Theme used on first visit. |
-| `storageKey` | `string` | `'ngx-theme...-theme'` | Key for `localStorage`. |
-| `mode` | `'class' \| 'attribute' \| 'both'` | `'class'` | How to apply theme to `<html>`. |
-| `strategy` | `'blocking' \| 'critters'` | `'critters'` | Anti-flash strategy. |
-| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Supported themes. |
+| `storageKey` | `string` | `'ngx-theme-stack'` | Key for `localStorage`. |
+| `mode` | `NgMode` | `'class'` | How to apply theme to `<html>`: `'class'`, `'attribute'` or `'both'`. |
+| `strategy` | `NgStrategy` | `'critters'` | Anti-flash strategy: `'critters'` (SSR) or `'blocking'`. |
+| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Additional supported themes. They are merged with the basic ones. |
 
 ---
 
@@ -68,15 +83,15 @@ Provider function to initialize the library in your `app.config.ts`.
 
 ### `NgTheme<T>`
 
-A type-safe union of themes. By default, it accepts `'light' | 'dark' | 'system'` and any string.
+A type-safe union. If used with `as const` in the configuration, it provides exact autocomplete.
 
 ### `NgMode`
 
 - `'class'`: Adds the theme name as a class to `<html>`.
-- `'attribute'`: Sets `data-theme="theme-name"` on `<html>`.
+- `'attribute'`: Sets `data-theme="name"` on `<html>`.
 - `'both'`: Applies both.
 
 ### `NgStrategy`
 
-- `'blocking'`: Standard CSS strategy.
-- `'critters'`: Optimized for SSR/SSG (inlined styles).
+- `'blocking'`: Injects a synchronous script into the `<head>`.
+- `'critters'`: Optimized for CSS inlining in SSR/SSG.

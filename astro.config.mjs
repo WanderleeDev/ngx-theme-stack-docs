@@ -38,6 +38,16 @@ export default defineConfig({
                       { label: 'Styling', slug: 'guides/styling' },
                       { label: 'Tailwind CSS v4', slug: 'guides/tailwind' },
                       { label: 'Performance', slug: 'guides/performance' },
+                      { label: 'Testing', slug: 'guides/testing' },
+                  ],
+              },
+              {
+                  label: 'Utilities',
+                  items: [
+                      { label: 'Toggle', slug: 'guides/utilities/toggle' },
+                      { label: 'Select', slug: 'guides/utilities/select' },
+                      { label: 'Cycle', slug: 'guides/utilities/cycle' },
+                      { label: 'Custom', slug: 'guides/utilities/custom' },
                   ],
               },
               {

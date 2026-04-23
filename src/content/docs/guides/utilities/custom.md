@@ -1,0 +1,48 @@
+---
+title: Custom
+description: How to use the CoreThemeService for total control over theme management.
+---
+
+If the convenience services (Toggle, Select, Cycle) don't fit your needs, you can use the `CoreThemeService` directly.
+
+## Using the Core Service
+
+The `CoreThemeService` is the brain of `ngx-theme-stack`. It provides signals for the theme state and methods to change it manually.
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { CoreThemeService } from "ngx-theme-stack";
+
+@Component({
+  selector: "app-custom-theme",
+  template: `
+    <div [class.is-hydrated]="theme.isHydrated()">
+      <p>Current theme: {{ theme.resolvedTheme() }}</p>
+      
+      <button (click)="theme.setTheme('dark')">Force Dark</button>
+      <button (click)="theme.setTheme('system')">Use System</button>
+    </div>
+  `,
+})
+export class CustomTheme {
+  protected readonly theme = inject(CoreThemeService);
+}
+```
+
+## Available Signals
+
+| Signal / Prop | Description |
+| :--- | :--- |
+| `availableThemes` | Array containing all configured themes. |
+| `selectedTheme` | The theme chosen by the user (can be `'system'`). |
+| `resolvedTheme` | The actual theme applied (never `'system'`). |
+| `isDark` | `true` if the resolved theme is dark. |
+| `isLight` | `true` if the resolved theme is light. |
+| `isSystem` | `true` if the user has chosen the system preference. |
+| `isHydrated` | `true` after client-side hydration. |
+
+### Methods
+
+- `setTheme(theme: NgTheme)`: Sets the active theme.
+
+For a complete list of signals and methods, see the [CoreThemeService API Reference](/reference/api#corethemeservice).

@@ -44,9 +44,9 @@ Al ejecutar `ng add`, se te presentarán dos opciones de configuración:
 Para ofrecer una experiencia "Zero Config", el comando de instalación automatiza lo siguiente:
 
 - **`package.json`**: Añade un script `"prebuild"` que ejecuta la sincronización automáticamente antes de cada compilación.
-- **`angular.json`**: 
-    - Añade `src/themes.css` a la lista de estilos globales.
-    - Configura la optimización `inlineCritical` según la estrategia seleccionada.
+- **`angular.json`**:
+  - Añade `src/themes.css` a la lista de estilos globales.
+  - Configura la optimización `inlineCritical` según la estrategia seleccionada.
 - **`index.html`**: Inyecta el marcador y el script de bloqueo anti-parpadeo en el `<head>`.
 - **`themes.css`**: Crea un archivo base con selectores listos para que definas tus variables.
 
@@ -54,59 +54,17 @@ Para ofrecer una experiencia "Zero Config", el comando de instalación automatiz
 
 Inyecta los servicios en tus componentes usando la función `inject()` de Angular.
 
-### Cambio Sencillo (Toggle)
+ngx-theme-stack proporciona diferentes utilidades para interactuar con los temas:
 
-La forma más fácil de añadir un interruptor de tema es usando `ThemeToggleService`.
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { ThemeToggleService } from 'ngx-theme-stack';
-
-@Component({
-  selector: 'app-theme-switch',
-  template: `
-    <button (click)="theme.toggle()">
-      {{ theme.isDark() ? '🌙' : '☀️' }}
-    </button>
-  `,
-  standalone: true
-})
-export class ThemeSwitchComponent {
-  protected readonly theme = inject(ThemeToggleService);
-}
-```
-
-### Control Avanzado
-
-Para escenarios más complejos, utiliza `CoreThemeService` para acceder a la lista completa de temas y señales específicas.
-
-```typescript
-import { Component, inject } from '@angular/core';
-import { CoreThemeService } from 'ngx-theme-stack';
-
-@Component({
-  template: `
-    <select [value]="theme.selectedTheme()" (change)="onThemeChange($event)">
-      @for (t of theme.availableThemes; track t) {
-        <option [value]="t">{{ t }}</option>
-      }
-    </select>
-  `
-})
-export class SettingsComponent {
-  protected readonly theme = inject(CoreThemeService);
-
-  onThemeChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
-    this.theme.setTheme(value);
-  }
-}
-```
+- [**Toggle**](/es/guides/utilities/toggle): Ideal para interruptores rápidos de tema claro/oscuro.
+- [**Select**](/es/guides/utilities/select): Perfecto para menús desplegables con múltiples temas.
+- [**Cycle**](/es/guides/utilities/cycle): Útil para botones que rotan secuencialmente por todos los temas.
+- [**Custom**](/es/guides/utilities/custom): Para cuando necesitas un control total sobre la lógica del tema.
 
 ## Siguientes Pasos
 
 Ahora que tienes la librería instalada, puedes:
+
 - [Configurar el provider inicial](/es/guides/configuration)
 - [Añadir tus variables CSS](/es/guides/styling)
 - [Ver la Referencia de API completa](/es/reference/api)
-

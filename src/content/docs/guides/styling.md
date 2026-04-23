@@ -54,6 +54,19 @@ If you chose `mode: 'attribute'`, use data attribute selectors:
 }
 ```
 
+## Smooth Transitions
+
+To ensure the theme change isn't jarring, it is recommended to add a smooth transition to the background color and text in your global styles file (e.g., `styles.css`):
+
+```css
+/* src/styles.css */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+```
+
+This will make the theme switch feel much more fluid and "premium" for the user.
+
 ## Best Practices
 
 1.  **Define a Fallback**: Always have a `:root` or a default theme class defined first.

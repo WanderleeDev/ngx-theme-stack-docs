@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 
 | Opción | Tipo | Defecto | Descripción |
 | :--- | :--- | :--- | :--- |
-| `themes` | `string[]` | `['light', 'dark', 'system']` | Lista de identificadores de temas soportados. |
+| `themes` | `string[]` | `['light', 'dark', 'system']` | Lista de temas adicionales. Se **fusionan** con los básicos. |
 | `defaultTheme` | `string` | `'system'` | Tema usado en la primera visita o cuando no hay preferencia guardada. |
 | `mode` | `NgMode` | `'class'` | Cómo se aplica el tema: `class`, `attribute` (`data-theme`), o `both`. |
 | `strategy` | `NgStrategy`| `'critters'` | Estrategia de rendimiento anti-parpadeo: `critters` (CSS inlined) o `blocking`. |

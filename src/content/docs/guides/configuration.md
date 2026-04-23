@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `themes` | `string[]` | `['light', 'dark', 'system']` | List of supported theme identifiers. |
+| `themes` | `string[]` | `['light', 'dark', 'system']` | List of additional theme identifiers. They are **merged** with the basic ones. |
 | `defaultTheme` | `string` | `'system'` | Theme used on first visit or when no preference is saved. |
 | `mode` | `NgMode` | `'class'` | How the theme is applied: `class`, `attribute` (`data-theme`), or `both`. |
 | `strategy` | `NgStrategy`| `'critters'` | Anti-flash performance strategy: `critters` (inlined CSS) or `blocking`. |

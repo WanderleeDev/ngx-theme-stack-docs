@@ -32,3 +32,65 @@ Si cambias la estrategia manualmente, **debes** ejecutar el comando de sincroniz
 ```bash
 ng generate ngx-theme-stack:sync
 ```
+
+## El Script Anti-Parpadeo (Blocking Script)
+
+Para lograr el efecto "Zero Flicker", la librería inyecta un pequeño script síncrono en el `<head>` de tu `index.html`. Este script se ejecuta **antes** de que el navegador pinte cualquier elemento del DOM.
+
+### ¿Qué hace exactamente?
+
+El script realiza los siguientes pasos en milisegundos:
+1. Lee la preferencia guardada en `localStorage`.
+2. Si no hay nada guardado, usa el `defaultTheme`.
+3. Si el tema es `'system'`, resuelve la preferencia real usando `matchMedia`.
+4. Aplica el tema al `<html>` (vía clase o atributo) y establece la propiedad `color-scheme`.
+
+### El Código Inyectado
+
+Aquí tienes el código (minificado por la librería) para tu transparencia:
+
+```javascript
+(function() {
+  try {
+    var k = "tu-storage-key";
+    var d = "tu-default-theme";
+    var m = "tu-mode";
+    var t = localStorage.getItem(k) || d;
+    var e = document.documentElement;
+
+    // Validación de seguridad básica
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(t)) t = d;
+
+    // Resolución de sistema
+    if (t === 'system') {
+      t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Aplicación inmediata al DOM
+    if (m === 'class' || m === 'both') e.classList.add(t);
+    if (m === 'attribute' || m === 'both') e.setAttribute('data-theme', t);
+    if (t === 'dark' || t === 'light') e.style.setProperty('color-scheme', t);
+  } catch (x) {}
+})();
+```
+
+## Evitar Parpadeos en Renderizado Condicional (SSR)
+
+Es importante entender la diferencia entre **estilos** y **contenido**:
+
+1.  **Estilos CSS (Automático)**: La librería aplica el tema al `<html>` antes de que Angular se cargue. No necesitas hacer nada para evitar el parpadeo en tus colores de fondo o texto si usas variables CSS.
+2.  **Contenido Condicional (Manual)**: Si necesitas mostrar un icono o una imagen diferente según el tema (ej. `@if (theme.isDark())`), puede ocurrir un pequeño parpadeo de hidratación en el servidor.
+
+Para estos casos de **contenido condicional**, usa la señal `isHydrated`:
+
+```html
+<!-- ✅ Recomendado para ICONOS o IMÁGENES -->
+@if (theme.isHydrated()) {
+  <img [src]="theme.isDark() ? 'dark-logo.png' : 'light-logo.png'">
+} @else {
+  <!-- Opcional: Un placeholder para evitar el salto visual -->
+  <div class="logo-placeholder"></div>
+}
+```
+
+La señal `isHydrated` te asegura que el contenido condicional solo se muestre cuando la librería ha sincronizado correctamente el estado del cliente con el `localStorage`.

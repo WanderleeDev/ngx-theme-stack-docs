@@ -54,6 +54,19 @@ Si elegiste `mode: 'attribute'`, utiliza selectores de atributos de datos:
 }
 ```
 
+## Transiciones Suaves
+
+Para que el cambio de tema no sea brusco, se recomienda añadir una transición suave al color de fondo y al texto en tu archivo de estilos globales (ej. `styles.css`):
+
+```css
+/* src/styles.css */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+```
+
+Esto hará que el cambio de tema se sienta mucho más fluido y "premium" para el usuario.
+
 ## Mejores Prácticas
 
 1.  **Define un Fallback**: Siempre ten un `:root` o una clase de tema por defecto definida primero.
