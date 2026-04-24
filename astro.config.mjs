@@ -1,6 +1,6 @@
 import starlight from '@astrojs/starlight';
-import { defineConfig } from 'astro/config';
 import starlightCatppuccin from '@catppuccin/starlight';
+import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 

@@ -3,9 +3,11 @@ title: Getting Started
 description: Learn how to install and set up ngx-theme-stack in your Angular project.
 ---
 
+import { Aside, Code, FileTree } from "@astrojs/starlight/components";
+
 <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
   <img 
-    src="https://raw.githubusercontent.com/WanderleeDev/ngx-theme-stack/main/projects/ngx-theme-stack/banner.png" 
+    src="https://raw.githubusercontent.com/WanderleeDev/ngx-theme-stack/refs/heads/main/projects/demo-ngx-theme-stack/public/banner.png" 
     alt="ngx-theme-stack banner" 
     style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"
   />
@@ -23,14 +25,16 @@ ng add ngx-theme-stack
 
 ### Installation Modes
 
-> [!TIP]
-> **🚀 Using Bun?**
-> Since `ng add` is currently not supported for Bun environments, please use this two-step process:
->
-> 1. **Install:** `bun add ngx-theme-stack`
-> 2. **Configure:** `ng generate ngx-theme-stack:ng-add`
->
-> This ensures Bun handles the dependency management while the schematic automates the code configuration (providers, index.html, tokens, etc.).
+<Aside type="tip" title="🚀 Using Bun?">
+Since `ng add` is currently not supported for Bun environments, please use this two-step process:
+
+1. **Install:**
+    <Code code="bun add ngx-theme-stack" lang="bash" />
+2. **Configure:**
+    <Code code="ng generate ngx-theme-stack:ng-add" lang="bash" />
+
+This ensures Bun handles the dependency management while the schematic automates the code configuration (providers, index.html, tokens, etc.).
+</Aside>
 
 When running `ng add`, you will be presented with two configuration options:
 
@@ -52,12 +56,23 @@ When running `ng add`, you will be presented with two configuration options:
 
 To provide a "Zero Config" experience, the installation command automates the following:
 
-- **`package.json`**: Adds a `"prebuild"` script that executes the synchronization automatically before every build.
-- **`angular.json`**:
-  - Adds `src/themes.css` to the global styles list.
-  - Configures the `inlineCritical` optimization based on your selected strategy.
-- **`index.html`**: Inyecta el marcador y el script de bloqueo anti-parpadeo en el `<head>`.
-- **`themes.css`**: Crea un archivo base con selectores listos para que definas tus variables.
+<FileTree>
+- public/
+- src/
+  - app/
+    - app.config.ts (Configure providers here)
+    - app.routes.ts
+    - app.ts
+    - app.html
+    - app.css
+  - index.html (Injects anti-flicker script and marker)
+  - main.ts
+  - styles.css
+  - themes.css (New! Base file with CSS variables)
+- angular.json (Registers styles and critical CSS optimization)
+- package.json (Adds "prebuild" script)
+- tsconfig.json
+</FileTree>
 
 ## Basic Usage
 
