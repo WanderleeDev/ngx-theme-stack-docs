@@ -9,6 +9,9 @@ export default defineConfig({
   integrations: [
       starlight({
           title: 'ngx-theme-stack',
+          components: {
+            Banner: './src/components/GlobalBanner.astro',
+          },
           customCss: ['./src/styles/global.css'],
           defaultLocale: 'root',
           locales: {

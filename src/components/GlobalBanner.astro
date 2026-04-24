@@ -1,0 +1,39 @@
+---
+/**
+ * Custom Global Banner component for Starlight.
+ * This component overrides the default Banner to provide a site-wide call to action
+ * while still respecting per-page banners if defined.
+ */
+const { banner } = Astro.locals.starlightRoute.entry.data;
+
+// Define the global star request as fallback
+const globalBanner = {
+  content: '⭐ ¿Te gusta ngx-theme-stack? ¡Apóyanos con una estrella en <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!'
+};
+
+const effectiveBanner = banner || globalBanner;
+---
+
+<div class="sl-banner" data-pagefind-ignore set:html={effectiveBanner.content} />
+
+<style>
+	.sl-banner {
+		--__sl-banner-text: var(--sl-color-banner-text, var(--sl-color-text-invert));
+		padding: 0.5rem 1rem;
+		background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
+		color: var(--__sl-banner-text);
+		font-weight: 600;
+		text-align: center;
+		font-size: var(--sl-text-sm);
+		line-height: var(--sl-line-height-tight);
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+	}
+	.sl-banner :global(a) {
+		color: var(--__sl-banner-text);
+		text-decoration: underline;
+    font-weight: 700;
+	}
+  .sl-banner :global(a:hover) {
+    opacity: 0.8;
+  }
+</style>
