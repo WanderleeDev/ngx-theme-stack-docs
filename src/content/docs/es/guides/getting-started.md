@@ -23,6 +23,15 @@ ng add ngx-theme-stack
 
 ### Modos de Instalación
 
+> [!TIP]
+> **🚀 ¿Usas Bun?**
+> Dado que `ng add` no está soportado actualmente para entornos Bun, por favor sigue este proceso de dos pasos:
+>
+> 1. **Instalar:** `bun add ngx-theme-stack`
+> 2. **Configurar:** `ng generate ngx-theme-stack:ng-add`
+>
+> Esto asegura que Bun maneje las dependencias mientras el schematic automatiza la configuración del código (providers, index.html, tokens, etc.).
+
 Al ejecutar `ng add`, se te presentarán dos opciones de configuración:
 
 1.  **Modo Rápido (Quick Mode)**:
