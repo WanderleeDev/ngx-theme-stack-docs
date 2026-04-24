@@ -21,11 +21,9 @@
   display: block !important;
   max-width: 100% !important;
   height: auto !important;
-  border-radius: 30px !important;
   /* Apply the notorious animation - No hover interaction */
   animation: float3D 6s ease-in-out infinite !important;
   will-change: transform, filter;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Ensure the container has enough space for the extreme rotation */
@@ -46,7 +44,6 @@
   .hero img, 
   .hero picture img {
     animation: float3D-mobile 5s ease-in-out infinite !important;
-    border-radius: 20px !important;
   }
 }
 

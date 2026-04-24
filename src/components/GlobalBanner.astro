@@ -2,16 +2,21 @@
 /**
  * Custom Global Banner component for Starlight.
  * This component overrides the default Banner to provide a site-wide call to action
- * while still respecting per-page banners if defined.
+ * while still respecting per-page banners if defined and supporting i18n.
  */
 const { banner } = Astro.locals.starlightRoute.entry.data;
+const { lang } = Astro.locals.starlightRoute;
 
-// Define the global star request as fallback
-const globalBanner = {
-  content: '⭐ ¿Te gusta ngx-theme-stack? ¡Apóyanos con una estrella en <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!'
+// Define localized fallback messages
+const messages = {
+  es: '⭐ ¿Te gusta ngx-theme-stack? ¡Apóyanos con una estrella en <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!',
+  en: '⭐ Loving ngx-theme-stack? Support us with a star on <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!'
 };
 
-const effectiveBanner = banner || globalBanner;
+// Select message based on current language (defaults to English)
+const globalContent = messages[lang as keyof typeof messages] || messages.en;
+
+const effectiveBanner = banner || { content: globalContent };
 ---
 
 <div class="sl-banner" data-pagefind-ignore set:html={effectiveBanner.content} />
