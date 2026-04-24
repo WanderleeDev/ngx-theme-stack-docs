@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+/* Ultra-Notorious 3D Floating Animation */
+@keyframes float3D {
+  0% {
+    transform: perspective(800px) rotateY(-35deg) rotateX(15deg) rotateZ(-2deg) translateY(0px);
+    filter: drop-shadow(30px 40px 60px rgba(0, 0, 0, 0.4));
+  }
+  50% {
+    transform: perspective(800px) rotateY(-25deg) rotateX(10deg) rotateZ(0deg) translateY(-30px);
+    filter: drop-shadow(50px 70px 90px rgba(0, 0, 0, 0.5));
+  }
+  100% {
+    transform: perspective(800px) rotateY(-35deg) rotateX(15deg) rotateZ(-2deg) translateY(0px);
+    filter: drop-shadow(30px 40px 60px rgba(0, 0, 0, 0.4));
+  }
+}
+
+.hero img, 
+.hero picture img {
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 30px !important;
+  /* Apply the notorious animation - No hover interaction */
+  animation: float3D 6s ease-in-out infinite !important;
+  will-change: transform, filter;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure the container has enough space for the extreme rotation */
+.hero .hero-image,
+.hero > div {
+  perspective: 1000px !important;
+  overflow: visible !important;
+  padding: 2rem !important;
+}
+
+/* Mobile version */
+@media (max-width: 50rem) {
+  @keyframes float3D-mobile {
+    0%, 100% { transform: perspective(600px) rotateY(-15deg) translateY(0px); }
+    50% { transform: perspective(600px) rotateY(-10deg) translateY(-15px); }
+  }
+  
+  .hero img, 
+  .hero picture img {
+    animation: float3D-mobile 5s ease-in-out infinite !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero img, 
+  .hero picture img {
+    animation: none !important;
+    transform: perspective(800px) rotateY(-25deg) rotateX(10deg) !important;
+  }
+}

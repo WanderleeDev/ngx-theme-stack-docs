@@ -9,6 +9,7 @@ export default defineConfig({
   integrations: [
       starlight({
           title: 'ngx-theme-stack',
+          customCss: ['./src/styles/global.css'],
           defaultLocale: 'root',
           locales: {
               root: { label: 'English', lang: 'en' },
