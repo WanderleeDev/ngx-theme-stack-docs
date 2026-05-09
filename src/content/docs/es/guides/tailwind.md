@@ -3,28 +3,20 @@ title: Integración con Tailwind CSS v4
 description: Optimiza tu flujo de trabajo integrando ngx-theme-stack con Tailwind CSS v4.
 ---
 
-Si estás utilizando **Tailwind CSS v4**, puedes lograr un HTML mucho más limpio mapeando las variables de tu `themes.css` a tu tema de Tailwind. Esto evita llenar tus componentes con variantes `dark:`.
+import { Aside } from '@astrojs/starlight/components';
 
-## 1. Configura Variantes Personalizadas
+Si estás utilizando **Tailwind CSS v4**, puedes mapear las variables de tu `themes.css` directamente como tokens de diseño de Tailwind. Esto te da clases de utilidad limpias y conscientes del tema que se actualizan automáticamente — **sin necesitar el prefijo `dark:`**.
 
-En tu archivo principal `styles.css`, define cómo Tailwind debe detectar tus temas:
+## Enfoque recomendado
+
+### 1. Mapea variables semánticas
+
+En tu `src/styles.css`, expón las variables del tema como tokens de Tailwind:
 
 ```css
 /* src/styles.css */
 @import 'tailwindcss';
 
-/* Si usas el modo Class */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* Si usas el modo Attribute */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-```
-
-## 2. Mapea Variables Semánticas
-
-Extiende tu tema de Tailwind usando las variables definidas en `themes.css`:
-
-```css
 @theme {
   --color-main-bg: var(--bg-color);
   --color-main-text: var(--text-color);
@@ -32,14 +24,35 @@ Extiende tu tema de Tailwind usando las variables definidas en `themes.css`:
 }
 ```
 
-## 3. Uso en Componentes
-
-Ahora, en lugar de escribir `<div class="bg-white dark:bg-black">`, simplemente escribes:
+### 2. Usa en componentes
 
 ```html
 <div class="bg-main-bg text-main-text shadow-xl">
-  <!-- Esto cambia de color automáticamente según el tema activo -->
+  <!-- refleja el tema activo automáticamente (dark, light, sunset, etc.) -->
 </div>
 ```
 
-Este enfoque mantiene el código de tu UI limpio, semántico y totalmente sincronizado con `ngx-theme-stack`.
+<Aside type="tip" title="¿Por qué funciona?">
+El script anti-parpadeo aplica la clase/atributo del tema en `<html>` antes de que Angular arranque, por lo que las variables CSS ya están resueltas. Como los tokens de Tailwind (`--color-main-bg`) apuntan directamente a esas variables, **este enfoque cubre todos los temas** sin configuración adicional.
+</Aside>
+
+---
+
+## Opcional: habilitar el prefijo `dark:`
+
+Solo necesario si quieres usar utilidades `dark:` vinculadas al toggle de ngx-theme-stack (ej. `dark:bg-black`).
+
+```css
+/* src/styles.css */
+@import 'tailwindcss';
+
+/* Modo Class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Modo Attribute */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+```
+
+<Aside type="caution" title="Limitación importante">
+Sobrescribir `@custom-variant dark` desconecta `dark:` de la preferencia del sistema operativo y solo cubre el tema `dark` integrado. Para soporte multi-tema (ej. `sunset`, `ocean`), el enfoque de variables semánticas de arriba es la solución correcta.
+</Aside>

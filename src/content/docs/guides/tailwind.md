@@ -3,28 +3,20 @@ title: Tailwind CSS v4 Integration
 description: Optimize your workflow by integrating ngx-theme-stack with Tailwind CSS v4.
 ---
 
-If you are using **Tailwind CSS v4**, you can achieve a much cleaner HTML by mapping your `themes.css` variables to your Tailwind theme. This avoids cluttering your components with `dark:` variants.
+import { Aside } from '@astrojs/starlight/components';
 
-## 1. Configure Custom Variants
+If you are using **Tailwind CSS v4**, you can map your `themes.css` variables directly to Tailwind design tokens. This gives you clean, theme-aware utility classes that update automatically — **no `dark:` prefix needed**.
 
-In your main `styles.css`, define how Tailwind should detect your themes:
+## Recommended approach
+
+### 1. Map semantic variables
+
+In your `src/styles.css`, expose your theme variables as Tailwind tokens:
 
 ```css
 /* src/styles.css */
 @import 'tailwindcss';
 
-/* If using Class mode */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* If using Attribute mode */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-```
-
-## 2. Map Semantic Variables
-
-Extend your Tailwind theme using the variables defined in `themes.css`:
-
-```css
 @theme {
   --color-main-bg: var(--bg-color);
   --color-main-text: var(--text-color);
@@ -32,14 +24,35 @@ Extend your Tailwind theme using the variables defined in `themes.css`:
 }
 ```
 
-## 3. Usage in Components
-
-Now, instead of writing `<div class="bg-white dark:bg-black">`, you simply write:
+### 2. Use in components
 
 ```html
 <div class="bg-main-bg text-main-text shadow-xl">
-  <!-- This automatically changes colors based on the active theme -->
+  <!-- automatically reflects the active theme (dark, light, sunset, etc.) -->
 </div>
 ```
 
-This approach keeps your UI code clean, semantic, and fully synchronized with `ngx-theme-stack`.
+<Aside type="tip" title="Why this works">
+The anti-flash script sets the theme class/attribute on `<html>` before Angular boots, so the CSS variables are already resolved. Since Tailwind tokens (`--color-main-bg`) point directly to those variables, **this single approach covers all themes** — no extra configuration needed.
+</Aside>
+
+---
+
+## Optional: enable the `dark:` prefix
+
+Only needed if you want to use `dark:` utilities tied to ngx-theme-stack's toggle (e.g. `dark:bg-black`).
+
+```css
+/* src/styles.css */
+@import 'tailwindcss';
+
+/* Class mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Attribute mode */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+```
+
+<Aside type="caution" title="Important limitation">
+Overriding `@custom-variant dark` disconnects `dark:` from the OS preference and only covers the built-in `dark` theme. For multi-theme support (e.g. `sunset`, `ocean`), the semantic variable approach above is the correct solution.
+</Aside>
