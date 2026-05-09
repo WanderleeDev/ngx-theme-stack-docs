@@ -8,12 +8,18 @@ description: Entiende cómo ngx-theme-stack evita el parpadeo de temas.
 ## Estrategias Disponibles
 
 ### 1. Critters (Por defecto)
-Ideal para sitios **SSR (Server-Side Rendering) o Estáticos**. Utiliza marcadores internos para engañar al builder de Angular e inyectar todas tus variables CSS de temas directamente en el `<head>` del HTML.
+Ideal para **la mayoría de las apps** (CSR, SSR y SSG). Utiliza marcadores internos para engañar al builder de Angular e inyectar todas tus variables CSS de temas directamente en el `<head>` del HTML.
 
 **Resultado:** Cero peticiones de red para las variables CSS. El tema se aplica incluso antes de que el navegador comience a descargar los archivos CSS externos.
 
 ### 2. Blocking
-Ideal para **SPAs estándar**. Carga el archivo `themes.css` como un recurso de bloqueo tradicional. Esto asegura que las variables estén disponibles tan pronto como el DOM comience a renderizarse.
+Carga el archivo `themes.css` como hoja de estilos bloqueante tradicional. El navegador bloquea el renderizado hasta que se descarga, por lo que no hay parpadeo — pero requiere una petición de red (luego cacheada por HTTP).
+
+**Ideal para:** apps con **CSP estricta** (Critters requiere `unsafe-inline` en `style-src`), o apps con muchos temas donde un archivo externo cacheado es más eficiente que el inlining en cada petición.
+
+:::note
+Ambas estrategias siempre inyectan el script anti-parpadeo inline en `<head>`. La estrategia solo controla **cómo se entregan las variables CSS**.
+:::
 
 ## Cómo Configurar
 

@@ -8,12 +8,18 @@ description: Understand how ngx-theme-stack prevents theme flickering.
 ## Available Strategies
 
 ### 1. Critters (Default)
-Best for **SSR/Static sites**. It uses hidden markers to trick the Angular builder into inlining all your theme CSS variables directly in the HTML `<head>`. 
+Best for **most apps** (CSR, SSR, and SSG). It uses hidden markers to trick the Angular builder into inlining all your theme CSS variables directly in the HTML `<head>`.
 
 **Result:** Zero network requests for CSS variables. The theme is applied even before the browser starts downloading external CSS files.
 
 ### 2. Blocking
-Best for **standard SPAs**. It loads the `themes.css` file as a traditional blocking resource. This ensures the variables are available as soon as the DOM starts rendering.
+Loads `themes.css` as a traditional render-blocking stylesheet. The browser blocks rendering until it's downloaded, so there's no flash — but it requires one network round-trip (then HTTP-cached).
+
+**Best for:** apps with a **strict CSP** (Critters requires `unsafe-inline` in `style-src`), or apps with many themes where a cached external file is more efficient than inlining on every request.
+
+:::note
+Both strategies always inject the anti-flash inline script into `<head>`. The strategy only controls **how the CSS variables are delivered**.
+:::
 
 ## How to Configure
 

@@ -29,10 +29,10 @@ export const appConfig: ApplicationConfig = {
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `themes` | `string[]` | `['light', 'dark', 'system']` | List of additional theme identifiers. They are **merged** with the basic ones. |
+| `themes` | `string[]` | `['light', 'dark', 'system']` | Custom themes to add. **Merged** with built-ins — e.g. `['sepia']` resolves to `['system', 'light', 'dark', 'sepia']`. |
 | `defaultTheme` | `string` | `'system'` | Theme used on first visit or when no preference is saved. |
 | `mode` | `NgMode` | `'class'` | How the theme is applied: `class`, `attribute` (`data-theme`), or `both`. |
-| `strategy` | `NgStrategy`| `'critters'` | Anti-flash performance strategy: `critters` (inlined CSS) or `blocking`. |
+| `strategy` | `NgStrategy`| `'critters'` | CSS delivery strategy: `critters` inlines vars in `<head>` (zero requests); `blocking` loads `themes.css` as a render-blocking file. |
 | `storageKey` | `string` | `'ngx-theme-stack'` | Key used to persist theme preference in `localStorage`. |
 
 :::important

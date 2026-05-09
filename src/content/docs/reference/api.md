@@ -17,11 +17,11 @@ The brain of the library. It handles theme persistence, system preference detect
 | :--- | :--- | :--- |
 | `selectedTheme` | `Signal<NgTheme>` | The theme explicitly selected by the user (can be `'system'`). |
 | `resolvedTheme` | `Signal<NgTheme>` | The actual theme applied to the DOM (resolves `'system'` to `'light'` or `'dark'`). Never `'system'`. |
-| `isDark` | `Signal<boolean>` | `true` if the resolved theme is `'dark'`. |
-| `isLight` | `Signal<boolean>` | `true` if the resolved theme is `'light'`. |
+| `isDark` | `Signal<boolean>` | `true` if the resolved theme is `'dark'`. `false` for custom themes (e.g. `'sunset'`). |
+| `isLight` | `Signal<boolean>` | `true` if the resolved theme is `'light'`. `false` for custom themes. |
 | `isSystem` | `Signal<boolean>` | `true` if the selected theme is `'system'`. |
 | `isHydrated` | `Signal<boolean>` | `true` after client-side hydration. **Crucial for avoiding SSR flicker.** |
-| `availableThemes` | `NgTheme[]` | List of all configured themes (including custom ones). |
+| `availableThemes` | `NgTheme[]` | The full resolved list of themes (built-ins + custom, post-merge). |
 
 #### Methods
 
@@ -74,8 +74,8 @@ Initializes the library. Custom themes passed in `config.themes` are automatical
 | `defaultTheme` | `NgTheme` | `'system'` | Theme used on first visit. |
 | `storageKey` | `string` | `'ngx-theme-stack'` | Key for `localStorage`. |
 | `mode` | `NgMode` | `'class'` | How to apply theme to `<html>`: `'class'`, `'attribute'` or `'both'`. |
-| `strategy` | `NgStrategy` | `'critters'` | Anti-flash strategy: `'critters'` (SSR) or `'blocking'`. |
-| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Additional supported themes. They are merged with the basic ones. |
+| `strategy` | `NgStrategy` | `'critters'` | How theme CSS is delivered: `'critters'` inlines vars in `<head>` (zero requests); `'blocking'` loads `themes.css` as a render-blocking stylesheet (HTTP-cacheable). |
+| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Custom themes to add. **Merged** with built-ins — passing `['sepia']` resolves to `['system', 'light', 'dark', 'sepia']`. |
 
 ---
 
@@ -93,5 +93,9 @@ A type-safe union. If used with `as const` in the configuration, it provides exa
 
 ### `NgStrategy`
 
-- `'blocking'`: Injects a synchronous script into the `<head>`.
-- `'critters'`: Optimized for CSS inlining in SSR/SSG.
+- `'critters'` (default): Inlines all theme CSS variables directly in `<head>` at build time via Angular's Critters optimizer. Zero network requests. Works with CSR, SSR, and SSG.
+- `'blocking'`: Loads `themes.css` as a render-blocking external stylesheet. One network request (then HTTP-cached). Required for strict CSP environments.
+
+:::note
+Both strategies always inject the anti-flash inline script into `<head>`. The strategy only controls **how the CSS variables are delivered**.
+:::

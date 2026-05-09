@@ -17,11 +17,11 @@ El cerebro de la librería. Gestiona la persistencia del tema, la detección de 
 | :--- | :--- | :--- |
 | `selectedTheme` | `Signal<NgTheme>` | El tema seleccionado explícitamente por el usuario (puede ser `'system'`). |
 | `resolvedTheme` | `Signal<NgTheme>` | El tema real aplicado al DOM (resuelve `'system'` a `'light'` o `'dark'`). Nunca es `'system'`. |
-| `isDark` | `Signal<boolean>` | `true` si el tema resuelto es `'dark'`. |
-| `isLight` | `Signal<boolean>` | `true` si el tema resuelto es `'light'`. |
+| `isDark` | `Signal<boolean>` | `true` si el tema resuelto es `'dark'`. `false` para temas personalizados (ej. `'sunset'`). |
+| `isLight` | `Signal<boolean>` | `true` si el tema resuelto es `'light'`. `false` para temas personalizados. |
 | `isSystem` | `Signal<boolean>` | `true` si el tema seleccionado es `'system'`. |
 | `isHydrated` | `Signal<boolean>` | `true` tras la hidratación en el cliente. **Crucial para evitar parpadeos en SSR.** |
-| `availableThemes` | `NgTheme[]` | Lista de todos los temas configurados (incluyendo los personalizados). |
+| `availableThemes` | `NgTheme[]` | La lista completa de temas resueltos (built-ins + personalizados, tras el merge). |
 
 #### Métodos
 
@@ -74,8 +74,8 @@ Inicializa la librería. Los temas personalizados pasados en `config.themes` se 
 | `defaultTheme` | `NgTheme` | `'system'` | Tema usado en la primera visita. |
 | `storageKey` | `string` | `'ngx-theme-stack'` | Clave para `localStorage`. |
 | `mode` | `NgMode` | `'class'` | Cómo aplicar el tema al `<html>`: `'class'`, `'attribute'` o `'both'`. |
-| `strategy` | `NgStrategy` | `'critters'` | Estrategia anti-parpadeo: `'critters'` (SSR) o `'blocking'`. |
-| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Temas adicionales soportados. Se fusionan con los básicos. |
+| `strategy` | `NgStrategy` | `'critters'` | Entrega de CSS: `'critters'` inyecta las vars en `<head>` (cero peticiones); `'blocking'` carga `themes.css` como hoja de estilos bloqueante (cacheable por HTTP). |
+| `themes` | `NgTheme[]` | `['light', 'dark', 'system']` | Temas personalizados a añadir. Se **fusionan** con los built-ins — ej. `['sepia']` resuelve a `['system', 'light', 'dark', 'sepia']`. |
 
 ---
 
@@ -93,5 +93,9 @@ Unión de tipos segura. Si se usa con `as const` en la configuración, ofrece au
 
 ### `NgStrategy`
 
-- `'blocking'`: Inyecta un script síncrono en el `<head>`.
-- `'critters'`: Optimizado para inlining de CSS en SSR/SSG.
+- `'critters'` (por defecto): Inyecta todas las variables CSS de temas directamente en `<head>` en tiempo de build. Cero peticiones de red. Funciona con CSR, SSR y SSG.
+- `'blocking'`: Carga `themes.css` como hoja de estilos bloqueante externa. Una petición de red (luego cacheada por HTTP). Necesaria para entornos con CSP estricta.
+
+:::note
+Ambas estrategias siempre inyectan el script anti-parpadeo inline en `<head>`. La estrategia solo controla **cómo se entregan las variables CSS**.
+:::
