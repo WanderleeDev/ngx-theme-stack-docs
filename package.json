@@ -12,11 +12,13 @@
   "dependencies": {
     "@astrojs/starlight": "^0.38.3",
     "@catppuccin/starlight": "^2.0.1",
+    "@fontsource-variable/inter-tight": "^5.2.7",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.1",
     "sharp": "^0.34.5",
+    "starlight-theme-next": "^0.4.0",
     "tailwindcss": "^4.2.2"
   }
 }

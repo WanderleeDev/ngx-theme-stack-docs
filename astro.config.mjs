@@ -1,14 +1,13 @@
 import starlight from '@astrojs/starlight';
-import starlightCatppuccin from '@catppuccin/starlight';
-import { defineConfig } from 'astro/config';
-
 import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config';
+import starlightThemeNext from 'starlight-theme-next';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
       starlight({
-          title: 'ngx-theme-stack',
+          title: 'Ngx-theme-stack',
           components: {
             Banner: './src/components/GlobalBanner.astro',
           },
@@ -59,12 +58,7 @@ export default defineConfig({
                   autogenerate: { directory: 'reference' },
               },
           ],
-          plugins: [
-            starlightCatppuccin({
-              dark: { flavor: 'macchiato', accent: 'sky' },
-              light: { flavor: 'latte', accent: 'sky' },
-            }),
-          ],
+          plugins: [starlightThemeNext()],
       }),
 	],
 

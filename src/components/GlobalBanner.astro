@@ -10,7 +10,7 @@ const { lang } = Astro.locals.starlightRoute;
 // Define localized fallback messages
 const messages = {
   es: '⭐ ¿Te gusta ngx-theme-stack? ¡Apóyanos con una estrella en <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!',
-  en: '⭐ Loving ngx-theme-stack? Support us with a star on <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!'
+  en: '⭐ Loving ngx-theme-stack? Support us with a star on <a href="https://github.com/WanderleeDev/ngx-theme-stack">GitHub</a>!',
 };
 
 // Select message based on current language (defaults to English)
@@ -19,25 +19,31 @@ const globalContent = messages[lang as keyof typeof messages] || messages.en;
 const effectiveBanner = banner || { content: globalContent };
 ---
 
-<div class="sl-banner" data-pagefind-ignore set:html={effectiveBanner.content} />
+<div
+  class="sl-banner"
+  data-pagefind-ignore
+  set:html={effectiveBanner.content}
+/>
 
 <style>
-	.sl-banner {
-		--__sl-banner-text: var(--sl-color-banner-text, var(--sl-color-text-invert));
-		padding: 0.5rem 1rem;
-		background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
-		color: var(--__sl-banner-text);
-		font-weight: 600;
-		text-align: center;
-		font-size: var(--sl-text-sm);
-		line-height: var(--sl-line-height-tight);
-    border-bottom: 1px solid var(--sl-color-hairline-shade);
-	}
-	.sl-banner :global(a) {
-		color: var(--__sl-banner-text);
-		text-decoration: underline;
+  .sl-banner {
+    --__sl-banner-text: #ffffff;
+    padding: 0.5rem 1rem;
+    background: radial-gradient(circle at 30% 50%, #ff0069 0%, #6c00f9 100%);
+    color: var(--__sl-banner-text);
+    font-weight: 600;
+    text-align: center;
+    font-size: var(--sl-text-sm);
+    line-height: var(--sl-line-height-tight);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    margin-inline: auto;
+  }
+  .sl-banner :global(a) {
+    color: var(--__sl-banner-text);
+    text-decoration: underline;
     font-weight: 700;
-	}
+  }
   .sl-banner :global(a:hover) {
     opacity: 0.8;
   }

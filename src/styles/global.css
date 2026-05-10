@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* Hero Title Gradient */
+.hero h1,
+.site-title {
+  background: radial-gradient(circle at 30% 50%, #ff0069 0%, #6c00f9 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+.hero h1 {
+  filter: drop-shadow(0 10px 20px rgba(108, 0, 249, 0.2));
+}
+
+/* Sidebar and Table of Contents Active Item Highlight */
+.sidebar-content a[aria-current="page"],
+.right-sidebar a[aria-current="true"] {
+  background: radial-gradient(circle at 20% 50%, rgba(255, 0, 105, 0.12) 0%, rgba(108, 0, 249, 0.12) 100%) !important;
+  color: #ff4d94 !important; /* Lighter version of #ff0069 */
+  border-inline-start: 3px solid #ff0069 !important;
+  font-weight: 700 !important;
+}
+
 /* Ultra-Notorious 3D Floating Animation */
 @keyframes float3D {
   0% {
@@ -55,3 +78,19 @@
     transform: perspective(800px) rotateY(-25deg) rotateX(10deg) !important;
   }
 }
+
+/* Custom Angular Badge */
+.badge-angular {
+  background: radial-gradient(circle at 30% 50%, rgba(255, 0, 105, 0.1) 0%, rgba(108, 0, 249, 0.1) 100%) !important;
+  color: #ff0069 !important;
+  border: 1.5px solid #ff0069 !important;
+  font-weight: 700 !important;
+  backdrop-filter: blur(4px); /* Subtle glass effect */
+}
+/* Dark mode adjustment for visibility */
+[data-theme='dark'] .badge-angular {
+  background: radial-gradient(circle at 30% 50%, rgba(255, 0, 105, 0.25) 0%, rgba(108, 0, 249, 0.25) 100%) !important;
+  color: #ffb3d1 !important; /* Lighter pink for dark mode */
+  border-color: #ff4d94 !important;
+}
+
