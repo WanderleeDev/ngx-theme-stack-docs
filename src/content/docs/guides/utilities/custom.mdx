@@ -2,12 +2,14 @@
 title: Custom
 description: How to use the CoreThemeService for total control over theme management.
 ---
+import { Badge } from '@astrojs/starlight/components';
+
 
 If the convenience services (Toggle, Select, Cycle) don't fit your needs, you can use the `CoreThemeService` directly.
 
 ## Using the Core Service
 
-The `CoreThemeService` is the brain of `ngx-theme-stack`. It provides signals for the theme state and methods to change it manually.
+The `CoreThemeService` is the brain of <Badge text="ngx-theme-stack" class="badge-angular" />. It provides signals for the theme state and methods to change it manually.
 
 ```typescript
 import { Component, inject } from "@angular/core";

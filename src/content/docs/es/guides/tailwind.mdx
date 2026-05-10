@@ -1,9 +1,9 @@
 ---
 title: Integración con Tailwind CSS v4
-description: Optimiza tu flujo de trabajo integrando ngx-theme-stack con Tailwind CSS v4.
+description: Optimiza tu flujo de trabajo integrando <Badge text="ngx-theme-stack" class="badge-angular" /> con Tailwind CSS v4.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Badge } from "@astrojs/starlight/components";
 
 Si estás utilizando **Tailwind CSS v4**, puedes mapear las variables de tu `themes.css` directamente como tokens de diseño de Tailwind. Esto te da clases de utilidad limpias y conscientes del tema que se actualizan automáticamente — **sin necesitar el prefijo `dark:`**.
 
@@ -40,7 +40,7 @@ El script anti-parpadeo aplica la clase/atributo del tema en `<html>` antes de q
 
 ## Opcional: habilitar el prefijo `dark:`
 
-Solo necesario si quieres usar utilidades `dark:` vinculadas al toggle de ngx-theme-stack (ej. `dark:bg-black`).
+Solo necesario si quieres usar utilidades `dark:` vinculadas al toggle de <Badge text="ngx-theme-stack" class="badge-angular" /> (ej. `dark:bg-black`).
 
 ```css
 /* src/styles.css */
