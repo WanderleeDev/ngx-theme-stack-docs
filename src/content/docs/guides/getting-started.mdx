@@ -1,9 +1,9 @@
 ---
 title: Getting Started
-description: Learn how to install and set up <Badge text="ngx-theme-stack" class="badge-angular" /> in your Angular project.
+description: Deep dive into how <Badge text="ngx-theme-stack" class="badge-angular" /> works and how to set it up.
 ---
 
-import { Aside, Code, FileTree, Badge } from "@astrojs/starlight/components";
+import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
   <img 
@@ -38,19 +38,22 @@ This ensures Bun handles the dependency management while the schematic automates
 
 When running `ng add`, you will be presented with two configuration options:
 
-1.  **Quick Mode**:
+<Tabs>
+  <TabItem label="Quick Mode">
     - Applies default configuration instantly.
     - Initial theme: `system`.
     - Apply mode: `class` (adds the theme class to the `<html>` element).
     - Available themes: `['light', 'dark', 'system']`.
     - **Strategy**: `critters` (Zero-flash via CSS inlining).
-
-2.  **Custom Mode**:
+  </TabItem>
+  <TabItem label="Custom Mode">
     - Choose which themes to include (e.g., if you have a `blue` or `high-contrast` theme).
     - Configure the default theme upon app startup.
     - Change the `localStorage` key where the theme choice is saved.
     - Decide how to apply themes: via classes (`class`), attributes (`data-theme`), or both.
     - **Pick your strategy**: `critters` for modern SSR/SSG apps or `blocking` for standard SPA.
+  </TabItem>
+</Tabs>
 
 ## What does `ng add` do?
 
@@ -80,15 +83,19 @@ Inject the services in your components using Angular's `inject()` function.
 
 <Badge text="ngx-theme-stack" class="badge-angular" /> provides different utilities to interact with themes:
 
-- [**Toggle**](/guides/utilities/toggle): Ideal for quick light/dark theme switches.
-- [**Select**](/guides/utilities/select): Perfect for dropdown menus with multiple themes.
-- [**Cycle**](/guides/utilities/cycle): Useful for buttons that rotate sequentially through all themes.
-- [**Custom**](/guides/utilities/custom): For when you need total control over theme logic.
+<CardGrid>
+  <LinkCard title="Toggle" href="/guides/utilities/toggle" description="Ideal for quick light/dark theme switches." />
+  <LinkCard title="Select" href="/guides/utilities/select" description="Perfect for dropdown menus with multiple themes." />
+  <LinkCard title="Cycle" href="/guides/utilities/cycle" description="Useful for buttons that rotate through all themes." />
+  <LinkCard title="Custom" href="/guides/utilities/custom" description="Total control over theme logic." />
+</CardGrid>
 
 ## Next Steps
 
 Now that you have the library installed, you can:
 
-- [Configure the initial provider](/guides/configuration)
-- [Add your CSS variables](/guides/styling)
-- [See the full API Reference](/reference/api)
+<CardGrid>
+  <LinkCard title="Configure Provider" href="/guides/configuration" description="Learn how to initialize the provider in your app.config.ts" />
+  <LinkCard title="Add CSS variables" href="/guides/styling" description="Define your themes using standard CSS variables." />
+  <LinkCard title="API Reference" href="/reference/api" description="See all available methods and services." />
+</CardGrid>

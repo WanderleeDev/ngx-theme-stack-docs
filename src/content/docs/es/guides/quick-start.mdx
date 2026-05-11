@@ -1,0 +1,75 @@
+---
+title: Inicio Rápido
+description: Configura <Badge text="ngx-theme-stack" class="badge-angular" /> en menos de un minuto.
+---
+
+import { Badge, LinkCard, CardGrid, Aside, Code } from "@astrojs/starlight/components";
+
+La forma más rápida de añadir gestión de temas a tu aplicación Angular.
+
+## 1. Instalar
+
+Ejecuta el siguiente comando para instalar la librería y automatizar la configuración inicial:
+
+```bash
+ng add ngx-theme-stack
+```
+
+Durante la instalación, elige el **Modo Rápido** para una configuración instantánea con los temas por defecto (`light`, `dark`, `system`).
+
+<Aside type="tip" title="🚀 ¿Usas Bun?">
+Dado que `ng add` no está soportado actualmente para entornos Bun, por favor sigue este proceso de dos pasos:
+
+1. **Instalar:**
+    <Code code="bun add ngx-theme-stack" lang="bash" />
+2. **Configurar:**
+    <Code code="ng generate ngx-theme-stack:ng-add" lang="bash" />
+
+Esto asegura que Bun maneje las dependencias mientras el schematic automatiza la configuración del código (providers, index.html, tokens, etc.).
+</Aside>
+
+## 2. Define tus estilos
+
+La instalación crea un archivo `src/themes.css`. Aquí es donde defines las variables de tus temas:
+
+```css
+/* src/themes.css */
+:root {
+  --primary: #6c00f9;
+}
+
+[data-theme='dark'] {
+  --primary: #ff0069;
+}
+```
+
+## 3. Alternar temas
+
+Inyecta el servicio `ThemeToggleService` en cualquier parte de tu aplicación para cambiar entre temas:
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { ThemeToggleService } from 'ngx-theme-stack';
+
+@Component({
+  selector: 'app-theme-toggle',
+  standalone: true,
+  template: `
+    <button (click)="themeToggle.toggle()">
+      El tema actual es: {{ themeToggle.resolvedTheme() }}
+    </button>
+  `
+})
+export class ThemeToggleComponent {
+  protected themeToggle = inject(ThemeToggleService);
+}
+```
+
+## Siguientes Pasos
+
+¿Quieres saber más? Consulta la guía completa o explora utilidades específicas.
+
+<CardGrid>
+  <LinkCard title="Primeros Pasos" href="/es/guides/getting-started/" description="Inmersión profunda en todas las características." />
+  <LinkCard title="Utilidades" href="/es/guides/utilities/toggle/" description="Explora todos los servicios de temas disponibles." />
+</CardGrid>

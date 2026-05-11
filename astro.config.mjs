@@ -25,37 +25,45 @@ export default defineConfig({
           },
           social: [
             { icon: 'github', label: 'GitHub', href: 'https://github.com/WanderleeDev/ngx-theme-stack' },
-            { icon: 'external', label: 'Demo', href: 'https://demo-ngx-theme-stack.wanderlee.site/' }
+            { icon: 'rocket', label: 'Demo', href: 'https://demo-ngx-theme-stack.wanderlee.site/' }
           ],
           sidebar: [
               {
                   label: 'Introduction',
+                  translations: { es: 'Introducción' },
                   items: [
-                      { label: 'Getting Started', slug: 'guides/getting-started' },
-                      { label: 'Configuration', slug: 'guides/configuration' },
+                      { label: 'Quick Start', translations: { es: 'Inicio Rápido' }, slug: 'guides/quick-start' },
+                      { label: 'Getting Started', translations: { es: 'Primeros Pasos' }, slug: 'guides/getting-started' },
+                      { label: 'Configuration', translations: { es: 'Configuración' }, slug: 'guides/configuration' },
                   ],
               },
               {
                   label: 'Guides',
+                  translations: { es: 'Guías' },
                   items: [
-                      { label: 'Styling', slug: 'guides/styling' },
+                      { label: 'Styling', translations: { es: 'Estilos' }, slug: 'guides/styling' },
                       { label: 'Tailwind CSS v4', slug: 'guides/tailwind' },
-                      { label: 'Performance', slug: 'guides/performance' },
-                      { label: 'Testing', slug: 'guides/testing' },
+                      { label: 'Performance', translations: { es: 'Rendimiento' }, slug: 'guides/performance' },
+                      { label: 'Testing', translations: { es: 'Pruebas' }, slug: 'guides/testing' },
                   ],
               },
               {
                   label: 'Utilities',
+                  translations: { es: 'Utilidades' },
                   items: [
                       { label: 'Toggle', slug: 'guides/utilities/toggle' },
-                      { label: 'Select', slug: 'guides/utilities/select' },
-                      { label: 'Cycle', slug: 'guides/utilities/cycle' },
-                      { label: 'Custom', slug: 'guides/utilities/custom' },
+                      { label: 'Select', translations: { es: 'Selección' }, slug: 'guides/utilities/select' },
+                      { label: 'Cycle', translations: { es: 'Ciclo' }, slug: 'guides/utilities/cycle' },
+                      { label: 'Custom', translations: { es: 'Personalizado' }, slug: 'guides/utilities/custom' },
                   ],
               },
               {
                   label: 'Reference',
-                  autogenerate: { directory: 'reference' },
+                  translations: { es: 'Referencia' },
+                  items: [
+                      { label: 'API Reference', translations: { es: 'Referencia API' }, slug: 'reference/api' },
+                      { label: 'Common Errors', translations: { es: 'Errores Comunes' }, slug: 'reference/errors' },
+                  ],
               },
           ],
           plugins: [starlightThemeNext()],

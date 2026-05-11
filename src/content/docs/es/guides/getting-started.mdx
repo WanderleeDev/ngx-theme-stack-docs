@@ -1,9 +1,9 @@
 ---
 title: Primeros Pasos
-description: Aprende cómo instalar y configurar <Badge text="ngx-theme-stack" class="badge-angular" /> en tu proyecto Angular.
+description: Guía detallada sobre el funcionamiento y configuración de <Badge text="ngx-theme-stack" class="badge-angular" />.
 ---
 
-import { Aside, Code, FileTree, Badge } from "@astrojs/starlight/components";
+import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from "@astrojs/starlight/components";
 
 <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
   <img 
@@ -38,19 +38,22 @@ Esto asegura que Bun maneje las dependencias mientras el schematic automatiza la
 
 Al ejecutar `ng add`, se te presentarán dos opciones de configuración:
 
-1.  **Modo Rápido (Quick Mode)**:
+<Tabs>
+  <TabItem label="Modo Rápido">
     - Aplica la configuración por defecto al instante.
     - Tema inicial: `system`.
     - Modo de aplicación: `class` (añade la clase del tema al elemento `<html>`).
     - Temas disponibles: `['light', 'dark', 'system']`.
     - **Estrategia**: `critters` (Cero parpadeo mediante CSS inlining).
-
-2.  **Modo Personalizado (Custom Mode)**:
+  </TabItem>
+  <TabItem label="Modo Personalizado">
     - Elige qué temas incluir (por ejemplo, si tienes un tema `blue` o `high-contrast`).
     - Configura el tema por defecto al iniciar la aplicación.
     - Cambia la clave de `localStorage` donde se guarda la elección del tema.
     - Decide cómo aplicar los temas: mediante clases (`class`), atributos (`data-theme`), o ambos.
     - **Elige tu estrategia**: `critters` para apps modernas con SSR/SSG o `blocking` para SPAs convencionales.
+  </TabItem>
+</Tabs>
 
 ## ¿Qué hace `ng add` por ti?
 
@@ -80,15 +83,19 @@ Inyecta los servicios en tus componentes usando la función `inject()` de Angula
 
 <Badge text="ngx-theme-stack" class="badge-angular" /> proporciona diferentes utilidades para interactuar con los temas:
 
-- [**Toggle**](/es/guides/utilities/toggle): Ideal para interruptores rápidos de tema claro/oscuro.
-- [**Select**](/es/guides/utilities/select): Perfecto para menús desplegables con múltiples temas.
-- [**Cycle**](/es/guides/utilities/cycle): Útil para botones que rotan secuencialmente por todos los temas.
-- [**Custom**](/es/guides/utilities/custom): Para cuando necesitas un control total sobre la lógica del tema.
+<CardGrid>
+  <LinkCard title="Toggle" href="/es/guides/utilities/toggle" description="Interruptores rápidos de tema claro/oscuro." />
+  <LinkCard title="Select" href="/es/guides/utilities/select" description="Menús desplegables con múltiples temas." />
+  <LinkCard title="Cycle" href="/es/guides/utilities/cycle" description="Botones que rotan por todos los temas." />
+  <LinkCard title="Custom" href="/es/guides/utilities/custom" description="Control total sobre la lógica del tema." />
+</CardGrid>
 
 ## Siguientes Pasos
 
 Ahora que tienes la librería instalada, puedes:
 
-- [Configurar el provider inicial](/es/guides/configuration)
-- [Añadir tus variables CSS](/es/guides/styling)
-- [Ver la Referencia de API completa](/es/reference/api)
+<CardGrid>
+  <LinkCard title="Configurar Provider" href="/es/guides/configuration" description="Aprende a inicializar el provider en tu app.config.ts" />
+  <LinkCard title="Añadir variables CSS" href="/es/guides/styling" description="Define tus temas usando variables CSS estándar." />
+  <LinkCard title="Referencia de API" href="/es/reference/api" description="Consulta todos los métodos y servicios disponibles." />
+</CardGrid>

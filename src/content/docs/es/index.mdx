@@ -7,8 +7,8 @@ hero:
   image:
     file: ../../../assets/banner-logo.png
   actions:
-    - text: Primeros Pasos
-      link: /es/guides/getting-started/
+    - text: Inicio Rápido
+      link: /es/guides/quick-start/
       icon: right-arrow
     - text: Demo en Vivo
       link: https://demo-ngx-theme-stack.wanderlee.site/
@@ -22,8 +22,20 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Características
 
 <CardGrid stagger>
+	<Card title="Arquitectura Moderna" icon="puzzle">
+		Basado en Angular Signals para máxima reactividad y rendimiento.
+	</Card>
+	<Card title="Cero Parpadeo" icon="approve-check-circle">
+		La estrategia Critters asegura que tu tema se aplique al instante sin destellos blancos.
+	</Card>
 	<Card title="Comando Único" icon="rocket">
 		Configuración automática mediante `ng add`. Sin configuración manual.
+	</Card>
+	<Card title="Tree Shakeable" icon="star">
+		Solo incluye el código que realmente utilizas. Optimizado para herramientas de construcción modernas y bundles ligeros.
+	</Card>
+	<Card title="Listo para SSR" icon="document">
+		Seguro para entornos de Server-Side Rendering.
 	</Card>
 	<Card title="Preferencia del Sistema" icon="laptop">
 		Sincronización automática con los ajustes del SO (`prefers-color-scheme`).
@@ -33,15 +45,6 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 	<Card title="Altamente Personalizable" icon="setting">
 		Soporte para temas personalizados, prefijos de clase y almacenamiento configurable.
-	</Card>
-	<Card title="Arquitectura Moderna" icon="puzzle">
-		Basado en Angular Signals para máxima reactividad y rendimiento.
-	</Card>
-	<Card title="Listo para SSR" icon="document">
-		Seguro para entornos de Server-Side Rendering.
-	</Card>
-	<Card title="Cero Parpadeo" icon="approve-check-circle">
-		La estrategia Critters asegura que tu tema se aplique al instante sin destellos blancos.
 	</Card>
 </CardGrid>
 

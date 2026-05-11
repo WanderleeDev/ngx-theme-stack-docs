@@ -7,8 +7,8 @@ hero:
   image:
     file: ../../assets/banner-logo.png
   actions:
-    - text: Getting Started
-      link: /guides/getting-started/
+    - text: Quick Start
+      link: /guides/quick-start/
       icon: right-arrow
     - text: Live Demo
       link: https://demo-ngx-theme-stack.wanderlee.site/
@@ -22,8 +22,20 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Features
 
 <CardGrid stagger>
+	<Card title="Modern Architecture" icon="puzzle">
+		Powered by Angular Signals for maximum reactivity and performance.
+	</Card>
+	<Card title="Zero Flicker" icon="approve-check-circle">
+		The Critters strategy ensures your theme is applied instantly without any white flash.
+	</Card>
 	<Card title="Single Command" icon="rocket">
 		Automatic configuration via `ng add`. No manual setup required.
+	</Card>
+	<Card title="Tree Shakeable" icon="star">
+		Only include the code you actually use. Optimized for modern build tools and small bundle sizes.
+	</Card>
+	<Card title="SSR Ready" icon="document">
+		Safe to use in Server-Side Rendering environments.
 	</Card>
 	<Card title="System Preference" icon="laptop">
 		Automatic synchronization with OS settings (`prefers-color-scheme`).
@@ -33,15 +45,6 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	</Card>
 	<Card title="Highly Customizable" icon="setting">
 		Support for custom themes, class prefixes, and configurable storage.
-	</Card>
-	<Card title="Modern Architecture" icon="puzzle">
-		Powered by Angular Signals for maximum reactivity and performance.
-	</Card>
-	<Card title="SSR Ready" icon="document">
-		Safe to use in Server-Side Rendering environments.
-	</Card>
-	<Card title="Zero Flicker" icon="approve-check-circle">
-		The Critters strategy ensures your theme is applied instantly without any white flash.
 	</Card>
 </CardGrid>
 
