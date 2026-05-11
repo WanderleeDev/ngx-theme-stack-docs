@@ -9,7 +9,26 @@ Si estás utilizando **Tailwind CSS v4**, puedes mapear las variables de tu `the
 
 ## Enfoque recomendado
 
-### 1. Mapea variables semánticas
+### 1. Define tus variables CSS
+
+Asegúrate de que tus temas están definidos en `src/themes.css`. Este archivo es gestionado por <Badge text="ngx-theme-stack" class="badge-angular" />:
+
+```css
+/* src/themes.css */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --card-bg: #f3f4f6;
+}
+
+[data-theme='dark'] {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --card-bg: #1e293b;
+}
+```
+
+### 2. Mapea variables semánticas
 
 En tu `src/styles.css`, expón las variables del tema como tokens de Tailwind:
 
@@ -24,7 +43,7 @@ En tu `src/styles.css`, expón las variables del tema como tokens de Tailwind:
 }
 ```
 
-### 2. Usa en componentes
+### 3. Usa en componentes
 
 ```html
 <div class="bg-main-bg text-main-text shadow-xl">

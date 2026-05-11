@@ -45,7 +45,7 @@ La instalación crea un archivo `src/themes.css`. Aquí es donde defines las var
 
 ## 3. Alternar temas
 
-Inyecta el servicio `ThemeToggleService` en cualquier parte de tu aplicación para cambiar entre temas:
+Inyecta el servicio `ThemeToggleService` en cualquier parte de tu aplicación para alternar entre temas:
 
 ```typescript
 import { Component, inject } from '@angular/core';
@@ -53,17 +53,29 @@ import { ThemeToggleService } from 'ngx-theme-stack';
 
 @Component({
   selector: 'app-theme-toggle',
-  standalone: true,
   template: `
-    <button (click)="themeToggle.toggle()">
-      El tema actual es: {{ themeToggle.resolvedTheme() }}
-    </button>
+    @if (themeToggle.isHydrated()) {
+      <button (click)="themeToggle.toggle()">
+        Tema: {{ themeToggle.resolvedTheme() }}
+      </button>
+    } @else {
+      <!-- Skeleton loader mientras se hidrata la app -->
+      <div class="skeleton-toggle"></div>
+    }
   `
 })
 export class ThemeToggleComponent {
   protected themeToggle = inject(ThemeToggleService);
 }
 ```
+
+<Aside type="tip" title="Evita el Layout Shift">
+Usar `isHydrated()` es fundamental para una buena experiencia de usuario. Permite mostrar un estado visual neutro (skeleton) mientras Angular se hidrata, evitando que los elementos de la interfaz "salten" o cambien bruscamente cuando el estado del tema se sincroniza en el cliente.
+</Aside>
+
+<Aside type="note" title="Más utilidades">
+Para casos de uso más avanzados como menús desplegables o rotación de múltiples temas, consulta `ThemeSelectService`, `ThemeCycleService` o la implementación `Custom`.
+</Aside>
 
 ## Siguientes Pasos
 

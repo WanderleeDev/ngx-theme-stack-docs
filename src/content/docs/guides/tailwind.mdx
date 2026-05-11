@@ -9,7 +9,26 @@ If you are using **Tailwind CSS v4**, you can map your `themes.css` variables di
 
 ## Recommended approach
 
-### 1. Map semantic variables
+### 1. Define your CSS variables
+
+Ensure your themes are defined in `src/themes.css`. This file is managed by <Badge text="ngx-theme-stack" class="badge-angular" />:
+
+```css
+/* src/themes.css */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --card-bg: #f3f4f6;
+}
+
+[data-theme='dark'] {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --card-bg: #1e293b;
+}
+```
+
+### 2. Map semantic variables
 
 In your `src/styles.css`, expose your theme variables as Tailwind tokens:
 
@@ -24,7 +43,7 @@ In your `src/styles.css`, expose your theme variables as Tailwind tokens:
 }
 ```
 
-### 2. Use in components
+### 3. Use in components
 
 ```html
 <div class="bg-main-bg text-main-text shadow-xl">

@@ -53,17 +53,29 @@ import { ThemeToggleService } from 'ngx-theme-stack';
 
 @Component({
   selector: 'app-theme-toggle',
-  standalone: true,
   template: `
-    <button (click)="themeToggle.toggle()">
-      Current theme is: {{ themeToggle.resolvedTheme() }}
-    </button>
+    @if (themeToggle.isHydrated()) {
+      <button (click)="themeToggle.toggle()">
+        Theme: {{ themeToggle.resolvedTheme() }}
+      </button>
+    } @else {
+      <!-- Skeleton loader while the app hydrates -->
+      <div class="skeleton-toggle"></div>
+    }
   `
 })
 export class ThemeToggleComponent {
   protected themeToggle = inject(ThemeToggleService);
 }
 ```
+
+<Aside type="tip" title="Avoid Layout Shift">
+Using `isHydrated()` is essential for a great user experience. It allows you to show a neutral visual state (skeleton) while Angular hydrates, preventing UI elements from "jumping" or shifting abruptly when the theme state synchronizes on the client.
+</Aside>
+
+<Aside type="note" title="More utilities">
+For more advanced use cases like dropdown menus or rotating multiple themes, check out `ThemeSelectService`, `ThemeCycleService`, or the `Custom` implementation.
+</Aside>
 
 ## Next Steps
 
