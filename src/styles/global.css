@@ -1,4 +1,22 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter-tight";
+@import '@fontsource/inter';
+
+:root {
+  --sl-font: 'Inter', sans-serif;
+  --sl-font-heading: 'Inter Tight Variable', sans-serif;
+}
+
+body {
+  font-family: var(--sl-font);
+}
+
+
+h1, h2, h3, h4, h5, h6, .site-title {
+  font-family: var(--sl-font-heading) !important;
+}
+
+
 
 /* Hero Title Gradient */
 .hero h1,
