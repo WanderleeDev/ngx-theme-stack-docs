@@ -112,3 +112,59 @@ h1, h2, h3, h4, h5, h6, .site-title {
   border-color: #ff4d94 !important;
 }
 
+/* Hero Actions Styling */
+.hero .actions {
+  gap: 1.5rem !important;
+  margin-top: 2.5rem !important;
+}
+
+.hero .actions a.sl-link-button {
+  border-radius: 12px !important;
+  padding: 0.8rem 2.2rem !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+/* Primary Button (Quick Start) */
+.hero .actions a.sl-link-button.primary {
+  background: linear-gradient(135deg, #ff0069 0%, #6c00f9 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 10px 25px -5px rgba(108, 0, 249, 0.4) !important;
+}
+
+.hero .actions a.sl-link-button.primary:hover {
+  box-shadow: 0 15px 35px -5px rgba(108, 0, 249, 0.6) !important;
+  filter: brightness(1.1);
+}
+
+/* Secondary/Minimal Button (Live Demo) */
+.hero .actions a.sl-link-button.minimal {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.hero .actions a.sl-link-button.minimal:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: #ff0069 !important;
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme='light'] .hero .actions a.sl-link-button.minimal {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #111 !important;
+}
+
+[data-theme='light'] .hero .actions a.sl-link-button.minimal:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: #6c00f9 !important;
+}
+
