@@ -34,11 +34,15 @@ provideThemeStack({
 ```
 
 :::warning
-Si cambias la estrategia manualmente, **debes** ejecutar el comando de sincronización para actualizar el script de bloqueo inyectado en tu `index.html`.
+Si cambias la estrategia manualmente, **debes** ejecutar el comando de sincronización para actualizar el script de bloqueo inyectado en tu `index.html`. En la mayoría de las configuraciones, esto se maneja de forma automática mediante hooks de scripts de tu gestor de paquetes.
 :::
 
 ```bash
-ng generate ngx-theme-stack:sync
+# Usando el script de package.json (recomendado)
+npm run ngx-theme-stack:sync
+
+# Directamente usando el schematic
+ng generate ngx-theme-stack:sync --project NOMBRE_DE_TU_PROYECTO
 ```
 
 ## El Script Anti-Parpadeo (Blocking Script)

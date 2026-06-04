@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
 | `storageKey` | `string` | `'ngx-theme-stack'` | Key used to persist theme preference in `localStorage`. |
 
 :::important
-Whenever you update these settings manually in `app.config.ts`, you should run the sync command to ensure your `index.html` is updated with the correct anti-flash script logic.
+Whenever you update these settings manually in `app.config.ts`, you should run the sync command to ensure your `index.html` is updated with the correct anti-flash script logic. In most setups, this is handled automatically on builds/runs via package manager hooks.
 :::
 
 ## Type-Safe Themes
@@ -56,7 +56,29 @@ With this configuration, any service you inject will know exactly which themes a
 
 The sync command refreshes the inline script in your `index.html` to match your current configuration.
 
+### Automatic Synchronization
+
+The `ng add` installer automatically registers package manager script hooks in your `package.json` to keep your theme options synchronized:
+
+```json
+"scripts": {
+  "ngx-theme-stack:sync": "ng generate ngx-theme-stack:sync --project YOUR_PROJECT_NAME",
+  "prestart": "npm run ngx-theme-stack:sync",
+  "prebuild": "npm run ngx-theme-stack:sync"
+}
+```
+
+This runs the synchronization script automatically before local serving (`npm start`, `pnpm start`, `yarn start`, `bun start`) and production builds (`ng build`).
+
+### Manual Synchronization
+
+If you bypass npm scripts (e.g. running `ng serve` directly from the CLI) or change settings without running a server or build, you can run the sync command manually:
+
 ```bash
+# Using the package.json script (recommended)
+npm run ngx-theme-stack:sync
+
+# Directly using the schematic
 ng generate ngx-theme-stack:sync --project YOUR_PROJECT_NAME
 ```
 

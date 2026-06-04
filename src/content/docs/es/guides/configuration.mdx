@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
 | `storageKey` | `string` | `'ngx-theme-stack'` | Clave utilizada para persistir la preferencia en `localStorage`. |
 
 :::important
-Cada vez que actualices estos ajustes manualmente en `app.config.ts`, debes ejecutar el comando de sincronización para asegurar que tu `index.html` se actualice con la lógica correcta del script anti-parpadeo.
+Cada vez que actualices estos ajustes manualmente en `app.config.ts`, debes ejecutar el comando de sincronización para asegurar que tu `index.html` se actualice con la lógica correcta del script anti-parpadeo. En la mayoría de las configuraciones, esto se maneja automáticamente al compilar o iniciar el servidor mediante hooks de scripts de tu gestor de paquetes.
 :::
 
 ## Temas con Tipado Seguro (Type-Safe)
@@ -56,7 +56,29 @@ Con esta configuración, cualquier servicio que inyectes sabrá exactamente qué
 
 El comando de sincronización refresca el script inlined en tu `index.html` para que coincida con tu configuración actual.
 
+### Sincronización Automática
+
+El instalador `ng add` registra automáticamente scripts en tu `package.json` correspondientes a tu gestor de paquetes para mantener sincronizadas las opciones de tus temas:
+
+```json
+"scripts": {
+  "ngx-theme-stack:sync": "ng generate ngx-theme-stack:sync --project NOMBRE_DE_TU_PROYECTO",
+  "prestart": "npm run ngx-theme-stack:sync",
+  "prebuild": "npm run ngx-theme-stack:sync"
+}
+```
+
+Esto ejecuta el script de sincronización de manera automática antes del desarrollo local (`npm start`, `pnpm start`, `yarn start`, `bun start`) y las compilaciones de producción (`ng build`).
+
+### Sincronización Manual
+
+Si evitas los scripts de npm (por ejemplo, ejecutando `ng serve` directamente en la CLI) o cambias la configuración sin iniciar un servidor o compilar, puedes sincronizar manualmente:
+
 ```bash
+# Usando el script de package.json (recomendado)
+npm run ngx-theme-stack:sync
+
+# Directamente usando el schematic
 ng generate ngx-theme-stack:sync --project NOMBRE_DE_TU_PROYECTO
 ```
 

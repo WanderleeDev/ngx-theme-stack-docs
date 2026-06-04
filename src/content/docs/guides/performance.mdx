@@ -34,11 +34,15 @@ provideThemeStack({
 ```
 
 :::warning
-If you change the strategy manually, you **must** run the sync command to update the blocking script injected into your `index.html`.
+If you change the strategy manually, you **must** run the sync command to update the blocking script injected into your `index.html`. In most setups, this is handled automatically via package manager script hooks.
 :::
 
 ```bash
-ng generate ngx-theme-stack:sync
+# Using the package.json script (recommended)
+npm run ngx-theme-stack:sync
+
+# Directly using the schematic
+ng generate ngx-theme-stack:sync --project YOUR_PROJECT_NAME
 ```
 
 ## The Anti-Flicker Script (Blocking Script)
