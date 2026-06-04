@@ -1,6 +1,6 @@
 ---
 title: Primeros Pasos
-description: Guía detallada sobre el funcionamiento y configuración de <Badge text="ngx-theme-stack" class="badge-angular" />.
+description: Guía detallada sobre el funcionamiento y configuración de <Badge text="ngx-theme-stack" class="badge-angular" /> en Angular 20+.
 ---
 
 import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from "@astrojs/starlight/components";
@@ -13,7 +13,7 @@ import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from 
   />
 </div>
 
-Un gestor de temas potente y sencillo para **Angular**. Diseñado para rendimiento y soporte SSR.
+Un gestor de temas potente y sencillo para **Angular 20+**. Diseñado para rendimiento y soporte SSR.
 
 ## Instalación
 
@@ -60,6 +60,10 @@ Al ejecutar `ng add`, se te presentarán dos opciones de configuración:
 Para ofrecer una experiencia "Zero Config", el comando de instalación automatiza lo siguiente:
 
 <FileTree>
+- .agents/
+  - skills/
+    - ngx-theme-stack/
+      - SKILL.md (Habilidad de agente de IA opcional)
 - public/
 - src/
   - app/
@@ -89,6 +93,21 @@ Inyecta los servicios en tus componentes usando la función `inject()` de Angula
   <LinkCard title="Cycle" href="/es/guides/utilities/cycle" description="Botones que rotan por todos los temas." />
   <LinkCard title="Custom" href="/es/guides/utilities/custom" description="Control total sobre la lógica del tema." />
 </CardGrid>
+
+## Seguridad y Confianza
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+  <a href="https://socket.dev/npm/package/ngx-theme-stack/overview/3.8.3" target="_blank" rel="noopener noreferrer">
+    <img src="https://socket.dev/api/badge/npm/package/ngx-theme-stack" alt="Socket Badge" />
+  </a>
+</div>
+
+La seguridad es un principio fundamental en el diseño de <Badge text="ngx-theme-stack" class="badge-angular" />. La librería cuenta con una **calificación perfecta de 100/100 en Socket.dev** en todas las categorías principales (Seguridad de la Cadena de Suministro, Vulnerabilidad, Calidad, Mantenimiento y Licencia):
+
+- **Seguridad de la Cadena de Suministro (Supply Chain):** Escaneo estricto de dependencias y fijación mediante overrides para evitar actualizaciones maliciosas.
+- **Vulnerabilidades:** Cero vulnerabilidades conocidas tanto en entornos de desarrollo como de producción.
+- **Seguridad en Tiempo de Ejecución:** El script de bloqueo anti-parpadeo valida cualquier entrada de tema usando una expresión regular estricta (`/^[a-zA-Z][a-zA-Z0-9_-]*$/`) y comprueba que pertenezca a la lista de temas configurados antes de interactuar con el DOM, previniendo ataques de inyección.
+- **Compilación de Plantillas Estáticas:** Las plantillas de los schematics se compilan directamente en assets de TypeScript para eliminar alertas de análisis de markdown en crudo y asegurar la confiabilidad en tiempo de compilación.
 
 ## Siguientes Pasos
 

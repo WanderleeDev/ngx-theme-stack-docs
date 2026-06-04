@@ -63,11 +63,12 @@ Aquí tienes el código (minificado por la librería) para tu transparencia:
     var k = "tu-storage-key";
     var d = "tu-default-theme";
     var m = "tu-mode";
+    var v = ["light", "dark", "system", "tus-temas-personalizados"];
     var t = localStorage.getItem(k) || d;
     var e = document.documentElement;
 
-    // Validación de seguridad básica
-    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(t)) t = d;
+    // Validación de seguridad (asegura formato correcto y que el tema esté configurado)
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(t) || v.indexOf(t) === -1) t = d;
 
     // Resolución de sistema
     if (t === 'system') {

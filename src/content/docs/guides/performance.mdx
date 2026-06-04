@@ -63,11 +63,12 @@ Here is the code (minified by the library) for your transparency:
     var k = "your-storage-key";
     var d = "your-default-theme";
     var m = "your-mode";
+    var v = ["light", "dark", "system", "your-custom-themes"];
     var t = localStorage.getItem(k) || d;
     var e = document.documentElement;
 
-    // Basic security validation
-    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(t)) t = d;
+    // Security validation (ensure format is correct and theme is configured)
+    if (!/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(t) || v.indexOf(t) === -1) t = d;
 
     // System resolution
     if (t === 'system') {

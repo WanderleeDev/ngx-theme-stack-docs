@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Deep dive into how <Badge text="ngx-theme-stack" class="badge-angular" /> works and how to set it up.
+description: Deep dive into how <Badge text="ngx-theme-stack" class="badge-angular" /> works and how to set it up in Angular 20+.
 ---
 
 import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from "@astrojs/starlight/components";
@@ -13,7 +13,7 @@ import { Aside, Code, FileTree, Badge, Tabs, TabItem, LinkCard, CardGrid } from 
   />
 </div>
 
-A simple and powerful headless theme manager for **Angular**. Built for performance and SSR support.
+A simple and powerful headless theme manager for **Angular 20+**. Built for performance and SSR support.
 
 ## Installation
 
@@ -60,6 +60,10 @@ When running `ng add`, you will be presented with two configuration options:
 To provide a "Zero Config" experience, the installation command automates the following:
 
 <FileTree>
+- .agents/
+  - skills/
+    - ngx-theme-stack/
+      - SKILL.md (Optional AI Agent Skill)
 - public/
 - src/
   - app/
@@ -89,6 +93,21 @@ Inject the services in your components using Angular's `inject()` function.
   <LinkCard title="Cycle" href="/guides/utilities/cycle" description="Useful for buttons that rotate through all themes." />
   <LinkCard title="Custom" href="/guides/utilities/custom" description="Total control over theme logic." />
 </CardGrid>
+
+## Security & Trust
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+  <a href="https://socket.dev/npm/package/ngx-theme-stack/overview/3.8.3" target="_blank" rel="noopener noreferrer">
+    <img src="https://socket.dev/api/badge/npm/package/ngx-theme-stack" alt="Socket Badge" />
+  </a>
+</div>
+
+Security is a core design principle for <Badge text="ngx-theme-stack" class="badge-angular" />. The library achieves a **100/100 score on Socket.dev** across all main categories (Supply Chain Security, Vulnerability, Quality, Maintenance, and License):
+
+- **Supply Chain Security:** Strict dependency scanning and pinning via overrides to prevent malicious updates.
+- **Vulnerabilities:** Zero known vulnerabilities in both production and development environments.
+- **Runtime Safety:** The anti-flash blocking script validates all theme inputs against a strict regular expression (`/^[a-zA-Z][a-zA-Z0-9_-]*$/`) and checks against configured themes before making any DOM updates, preventing injection attacks.
+- **Static Template Compilation:** Schematic templates are converted directly to TypeScript assets to eliminate raw markdown parsing alerts and ensure build-time safety.
 
 ## Next Steps
 
