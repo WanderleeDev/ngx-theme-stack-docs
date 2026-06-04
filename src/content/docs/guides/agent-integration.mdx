@@ -1,0 +1,80 @@
+---
+title: AI Agent Integration
+description: Optimize your workflow by configuring AI coding assistants (Gemini, Claude, Copilot, Cursor) to work flawlessly with ngx-theme-stack.
+---
+
+import { Badge, FileTree, Aside } from "@astrojs/starlight/components";
+
+<Badge text="ngx-theme-stack" class="badge-angular" /> is designed for the modern web development era. It includes built-in support for AI-assisted coding by generating structured **AI Agent Skills**. 
+
+These files tell AI assistants (like Google Antigravity, Gemini, Copilot, Cursor, or Claude Code) exactly how to use the library, prevent common bugs, write correct Angular 20+ signals code, and handle SSR hydration protection.
+
+---
+
+## What is an AI Agent Skill?
+
+An AI Agent Skill is a set of markdown and TypeScript files placed in your workspace under the `.agents/` folder. When you ask an AI assistant to implement or edit theme components, the assistant reads these files to understand:
+
+1. **Interaction Rules:** The prompt requirements (e.g. asking you to choose between Toggle, Cycle, or Select before writing code).
+2. **Implementation Constraints:** Avoiding mixing multiple services in the same component, or using Tailwind's `dark:` modifier when CSS variables are preferred.
+3. **SSR Hydration Safety:** The mandatory use of `@if (theme.isHydrated())` guards for templates to prevent layout shifts.
+4. **Code References:** Pre-written sample code for components, custom configurations, and API references.
+
+---
+
+## Setup
+
+You can set up the AI Agent Skill either during installation or generate it manually later.
+
+### 1. Automatic Setup
+
+During `ng add ngx-theme-stack`, the behavior depends on the installation mode you choose:
+
+* **Custom Mode:** The schematic will prompt you:
+  ```bash
+  Generate an AI Agent Skill (SKILL.md) in the project root? [Y/n]
+  ```
+  Choosing **Yes** (or pressing Enter) automatically scaffolds all necessary files.
+* **Quick Mode:** The schematic applies defaults directly without prompting and **does not generate the skill by default**. To generate the skill while using Quick Mode, you must explicitly append the `--add-skill` option:
+  ```bash
+  ng add ngx-theme-stack --add-skill
+  ```
+
+### 2. Manual Setup / Re-generation
+
+If you skipped the skill generation during the initial setup or deleted the files, you can generate them at any time by running:
+
+```bash
+ng generate ngx-theme-stack:skill --project YOUR_PROJECT_NAME
+```
+
+---
+
+## Generated Structure
+
+Once generated, the following structure is added to your workspace root:
+
+<FileTree>
+- .agents/
+  - skills/
+    - ngx-theme-stack/
+      - SKILL.md (Core agent rules & instructions)
+      - references/
+        - api-reference.md (Full details on CoreThemeService and utilities)
+      - assets/
+        - theme-toggle.ts (Example implementation for ThemeToggleService)
+        - theme-cycle.ts (Example implementation for ThemeCycleService)
+        - theme-select.ts (Example implementation for ThemeSelectService)
+</FileTree>
+
+<Aside type="tip" title="Keep it in your Repository">
+We recommend committing the `.agents/` directory to your version control system (Git). This ensures every developer on your team (and their AI coding assistants) has access to the same library guidelines, ensuring consistent code generation.
+</Aside>
+
+---
+
+## Why use AI Skills?
+
+* **No More Hallucinations:** Prevents AI from inventing methods or importing deprecated services.
+* **Flicker-Free UI:** The AI is instructed to always guard theme components with `isHydrated()`, avoiding server/client mismatches in SSR.
+* **Instant Onboarding:** New developers using AI tools can instantly generate theme switchers that follow your project's styling pattern (like Tailwind CSS v4 variables mapping).

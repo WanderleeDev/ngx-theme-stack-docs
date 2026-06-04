@@ -1,0 +1,80 @@
+---
+title: Integración con Agentes de IA
+description: Optimiza tu flujo de trabajo configurando asistentes de codificación de IA (Gemini, Claude, Copilot, Cursor) para trabajar perfectamente con ngx-theme-stack.
+---
+
+import { Badge, FileTree, Aside } from "@astrojs/starlight/components";
+
+<Badge text="ngx-theme-stack" class="badge-angular" /> está diseñado para la era del desarrollo web moderno. Incluye soporte nativo para la codificación asistida por Inteligencia Artificial mediante la generación de **Habilidades de Agente de IA** (AI Agent Skills) estructuradas.
+
+Estos archivos indican exactamente a los asistentes de IA (como Google Antigravity, Gemini, Copilot, Cursor o Claude Code) cómo usar la librería, evitar errores comunes, generar código correcto basado en Angular Signals (versiones 20+) y manejar la protección de hidratación en SSR.
+
+---
+
+## ¿Qué es una Habilidad de Agente de IA (AI Agent Skill)?
+
+Es un conjunto de archivos Markdown y TypeScript que se colocan en tu espacio de trabajo bajo la carpeta `.agents/`. Cuando pides a un asistente de IA que implemente o edite componentes de tema, el asistente lee estos archivos para comprender:
+
+1. **Reglas de Interacción:** Requisitos de prompts (ej. pedirte que elijas entre Toggle, Cycle o Select antes de escribir código).
+2. **Restricciones de Implementación:** Evitar mezclar múltiples servicios en el mismo componente, o usar el modificador `dark:` de Tailwind cuando es preferible usar variables CSS semánticas.
+3. **Seguridad de Hidratación en SSR:** El uso obligatorio de guardas `@if (theme.isHydrated())` en las plantillas para evitar saltos visuales o descuadres en la hidratación.
+4. **Referencias de Código:** Ejemplos listos de componentes, configuraciones personalizadas y referencias de la API de la librería.
+
+---
+
+## Configuración
+
+Puedes configurar la Habilidad del Agente de IA durante la instalación o generarla manualmente más adelante.
+
+### 1. Configuración Automática
+
+Durante la ejecución de `ng add ngx-theme-stack`, el comportamiento dependerá del modo de instalación que elijas:
+
+* **Modo Personalizado (Custom):** El schematic te preguntará:
+  ```bash
+  Generate an AI Agent Skill (SKILL.md) in the project root? [Y/n]
+  ```
+  Si respondes **Sí** (Y) o presionas Enter, se crearán automáticamente todos los archivos necesarios.
+* **Modo Rápido (Quick):** El schematic aplica los valores por defecto sin preguntar y **no genera la habilidad por defecto**. Para generar la habilidad usando el Modo Rápido, debes añadir explícitamente la opción `--add-skill` al comando:
+  ```bash
+  ng add ngx-theme-stack --add-skill
+  ```
+
+### 2. Configuración Manual / Regeneración
+
+Si te saltaste la generación de la habilidad durante la instalación inicial o borraste los archivos, puedes generarlos en cualquier momento ejecutando:
+
+```bash
+ng generate ngx-theme-stack:skill --project NOMBRE_DE_TU_PROYECTO
+```
+
+---
+
+## Estructura Generada
+
+Una vez generado, se añadirá la siguiente estructura en la raíz de tu espacio de trabajo:
+
+<FileTree>
+- .agents/
+  - skills/
+    - ngx-theme-stack/
+      - SKILL.md (Reglas e instrucciones principales para el agente)
+      - references/
+        - api-reference.md (Detalles completos de CoreThemeService y utilidades)
+      - assets/
+        - theme-toggle.ts (Ejemplo de implementación para ThemeToggleService)
+        - theme-cycle.ts (Ejemplo de implementación para ThemeCycleService)
+        - theme-select.ts (Ejemplo de implementación para ThemeSelectService)
+</FileTree>
+
+<Aside type="tip" title="Consérvalo en tu Repositorio">
+Recomendamos subir la carpeta `.agents/` a tu sistema de control de versiones (Git). Esto garantiza que cada desarrollador de tu equipo (y sus asistentes de IA) tengan acceso a las mismas directrices de la librería, asegurando la consistencia en el código generado.
+</Aside>
+
+---
+
+## ¿Por qué usar Habilidades de IA?
+
+* **Sin Alucinaciones:** Evita que la IA invente métodos o importe servicios obsoletos.
+* **Componentes Libres de Parpadeos:** Se instruye a la IA a proteger siempre los componentes con `isHydrated()`, evitando discrepancias de servidor/cliente en SSR.
+* **Adopción Inmediata:** Los nuevos desarrolladores que usen herramientas de IA pueden generar selectores de temas de forma instantánea siguiendo el patrón de estilos de tu proyecto (como el mapeo de variables de Tailwind CSS v4).

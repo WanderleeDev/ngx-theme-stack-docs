@@ -5,6 +5,9 @@ import starlightThemeNext from 'starlight-theme-next';
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: {
+    gfm: true,
+  },
   integrations: [
       starlight({
           title: 'Ngx-theme-stack',
@@ -45,6 +48,7 @@ export default defineConfig({
                       { label: 'Tailwind CSS v4', slug: 'guides/tailwind' },
                       { label: 'Performance', translations: { es: 'Rendimiento' }, slug: 'guides/performance' },
                       { label: 'Testing', translations: { es: 'Pruebas' }, slug: 'guides/testing' },
+                      { label: 'AI Agent Integration', translations: { es: 'Integración con Agentes de IA' }, slug: 'guides/agent-integration' },
                   ],
               },
               {
