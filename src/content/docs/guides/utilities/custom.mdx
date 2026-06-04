@@ -2,8 +2,8 @@
 title: Custom
 description: How to use the CoreThemeService for total control over theme management.
 ---
-import { Badge } from '@astrojs/starlight/components';
 
+import { Badge } from '@astrojs/starlight/components';
 
 If the convenience services (Toggle, Select, Cycle) don't fit your needs, you can use the `CoreThemeService` directly.
 
@@ -20,7 +20,7 @@ import { CoreThemeService } from "ngx-theme-stack";
   template: `
     <div [class.is-hydrated]="theme.isHydrated()">
       <p>Current theme: {{ theme.resolvedTheme() }}</p>
-      
+
       <button (click)="theme.setTheme('dark')">Force Dark</button>
       <button (click)="theme.setTheme('system')">Use System</button>
     </div>
@@ -33,15 +33,15 @@ export class CustomTheme {
 
 ## Available Signals
 
-| Signal / Prop | Description |
-| :--- | :--- |
-| `availableThemes` | Array containing all configured themes. |
-| `selectedTheme` | The theme chosen by the user (can be `'system'`). |
-| `resolvedTheme` | The actual theme applied (never `'system'`). |
-| `isDark` | `true` if the resolved theme is dark. |
-| `isLight` | `true` if the resolved theme is light. |
-| `isSystem` | `true` if the user has chosen the system preference. |
-| `isHydrated` | `true` after client-side hydration. |
+| Signal / Prop     | Description                                          |
+| :---------------- | :--------------------------------------------------- |
+| `availableThemes` | Array containing all configured themes.              |
+| `selectedTheme`   | The theme chosen by the user (can be `'system'`).    |
+| `resolvedTheme`   | The actual theme applied (never `'system'`).         |
+| `isDark`          | `true` if the resolved theme is dark.                |
+| `isLight`         | `true` if the resolved theme is light.               |
+| `isSystem`        | `true` if the user has chosen the system preference. |
+| `isHydrated`      | `true` after client-side hydration.                  |
 
 ### Methods
 

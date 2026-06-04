@@ -2,8 +2,8 @@
 title: Custom
 description: Cómo usar el CoreThemeService para tener un control total sobre la gestión de temas.
 ---
-import { Badge } from '@astrojs/starlight/components';
 
+import { Badge } from '@astrojs/starlight/components';
 
 Si los servicios de conveniencia (Toggle, Select, Cycle) no se ajustan a tus necesidades, puedes usar el `CoreThemeService` directamente.
 
@@ -20,7 +20,7 @@ import { CoreThemeService } from "ngx-theme-stack";
   template: `
     <div [class.is-hydrated]="theme.isHydrated()">
       <p>Tema actual: {{ theme.resolvedTheme() }}</p>
-      
+
       <button (click)="theme.setTheme('dark')">Forzar Oscuro</button>
       <button (click)="theme.setTheme('system')">Usar Sistema</button>
     </div>
@@ -33,15 +33,15 @@ export class CustomTheme {
 
 ## Señales Disponibles
 
-| Signal / Prop | Descripción |
-| :--- | :--- |
-| `availableThemes` | Array con todos los temas configurados. |
-| `selectedTheme` | El tema elegido por el usuario (puede ser `'system'`). |
-| `resolvedTheme` | El tema real aplicado (nunca es `'system'`). |
-| `isDark` | `true` si el tema resuelto es oscuro. |
-| `isLight` | `true` si el tema resuelto es claro. |
-| `isSystem` | `true` si el usuario ha elegido la preferencia del sistema. |
-| `isHydrated` | `true` tras la hidratación en el cliente. |
+| Signal / Prop     | Descripción                                                 |
+| :---------------- | :---------------------------------------------------------- |
+| `availableThemes` | Array con todos los temas configurados.                     |
+| `selectedTheme`   | El tema elegido por el usuario (puede ser `'system'`).      |
+| `resolvedTheme`   | El tema real aplicado (nunca es `'system'`).                |
+| `isDark`          | `true` si el tema resuelto es oscuro.                       |
+| `isLight`         | `true` si el tema resuelto es claro.                        |
+| `isSystem`        | `true` si el usuario ha elegido la preferencia del sistema. |
+| `isHydrated`      | `true` tras la hidratación en el cliente.                   |
 
 ### Métodos
 
