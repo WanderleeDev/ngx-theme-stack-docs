@@ -13,6 +13,7 @@ export default defineConfig({
           title: 'Ngx-theme-stack',
           components: {
             Banner: './src/components/GlobalBanner.astro',
+            SocialIcons: './src/components/SocialIcons.astro',
           },
           customCss: ['./src/styles/global.css'],
           defaultLocale: 'root',
